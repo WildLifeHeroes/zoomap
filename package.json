@@ -1,0 +1,33 @@
+{
+  "name": "zoomap",
+  "version": "1.0.0",
+  "description": "Interactive Zoo Map",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WildLifeHeroes/zoomap.git"
+  },
+  "author": "Aliona, Dustin, Jason",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WildLifeHeroes/zoomap/issues"
+  },
+  "homepage": "https://github.com/WildLifeHeroes/zoomap#readme",
+  "devDependencies": {
+    "morgan": "^1.10.0"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "bcrypt-nodejs": "0.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.6",
+    "path": "^0.12.7",
+    "xss": "^1.0.8"
+  }
+}
