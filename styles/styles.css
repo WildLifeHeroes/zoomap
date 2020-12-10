@@ -1,11 +1,105 @@
-.card {
-    display: grid;
-    grid-template-columns: 500px;
-    grid-template-rows: 20px 200px 200px 20px;
-    grid-template-areas: "title" "images" "descriptions" "buttons";
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
 
+body {
+  background-color: var(--primary-background-color);
+  padding: 0px 10px;
+}
+
+img {
+  max-width: 100%;
+}
+
+.visual {
+  border: 1px solid blue;
+}
+
+.padding10 {
+  padding: 10px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  grid-template-columns: minmax(auto, 600px);
+  grid-template-rows: auto 200px 150px auto;
+  grid-template-areas: "title" "images" "descriptions" "buttons";
+
+  border-radius: 18px;
+  background: white;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);
+  text-align: center;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.6);
+}
+
+.card_title {
+  grid-area: title;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid blue;
+}
+
+.close_btn {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+.close_btn:hover {
+    color: red;
+}
+
+.card_images {
+  grid-area: images;
+}
+
+.img {
+  background: url("https://www.pdza.org/wp-content/uploads/2018/04/KBYG-polar-bear-close.jpg");
+  background-size: contain;
+  overflow: hidden;
+  border-radius: 18px;
+  width: 180px;
+  height: 180px;
+}
+
+.card_descriptions {
+  grid-area: descriptions;
+  border-bottom: 1px solid blue;
+  border-top: 1px solid blue;
+}
+
+.card_buttons {
+  grid-area: buttons;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.button {
+    border: 1px solid blue;
     border-radius: 18px;
-    background: white;
-    box-shadow: 5px 5px 15px rgba(0,0,0,0.9);
-    text-align: center;
+    padding: 0.3em;
+    width: 100px;
+    margin-top: 10px;
+}
+
+.button:hover {
+  color: #fff;
+  background-color: black;
+}
+
+@media (min-width:560px) {
+  /*  */
 }
