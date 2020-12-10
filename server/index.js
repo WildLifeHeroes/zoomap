@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const router = require('./routes');
@@ -13,10 +14,8 @@ app.use(morgan('dev')); // dev only
 app.use(express.json());
 app.use('/', express.static(PUBLIC_DIR));
 
-app.get('/', (req, res) => {
-  console.log('test');
-  res.send('test');
-})
+app.all('*', router);
+
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}. `);
 })

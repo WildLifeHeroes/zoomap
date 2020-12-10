@@ -2,12 +2,6 @@ const express = require('express');
 const router = express.Router();
 
 /*********************************
- * HOME PAGE
- *********************************/
-router.get('/', (req, res) => {
-
-});
-/*********************************
  * LOGIN PAGE
  *********************************/
 router.get('/login', (req, res) => {
