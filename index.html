@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Virual Zoo</title>
+    <link rel="stylesheet" href="stylesheet/styles.css" />
+  </head>
+  <body>
+    <!-- navigation bar and it's content -->
+    <nav class="nav">
+      <a href="https://www.pdza.org/visit/open/" target="_blank" class="logo">
+        <img
+          src="https://pbs.twimg.com/profile_images/1075148407084216320/m2P5DN19_400x400.jpg"
+          class="logo"
+      /></a>
+      <ul>
+        <!-- <li>
+          <a class="nav-link align-left" href="/portfolio/work.html"> <= Go to PD Zoo</a>
+        </li> -->
+        <li>
+          <a class="nav-link" href="/portfolio/">Welcome</a>
+        </li>
+        <li>
+          <a class="nav-link active" href="/portfolio/hobbies.html"
+            >Membership</a
+          >
+        </li>
+      </ul>
+    </nav>
+<!-- main image containter for main page -->
+    <div class="img-container">
+      <!-- side image ............. -->
+      <div>
+        <img
+          src="https://i.dlpng.com/static/png/6379450_preview.png"
+          class="side-img-right"
+        />
+      </div>
+<!-- map -->
+      <div class="main-content">
+        <img
+          src="images/PDZmap.jpg"
+          alt="Point Defiance Zoom Map"
+          usemap="#zoomap"
+          width="1280"
+          height="675"
+          class="map-img"
+        />
+        <map name="zoomap" id="color-map">
+          <area
+          id="shape1"
+            shape="rect"
+            coords="155,72,149,77,152,85,160,84,161,77"
+            alt="animal.."
+            href="computer.htm"
+            onclick="myFunction()"
+          />
+          <area
+          id="shape2"
+            shape="rect"
+            coords="290,172,333,250"
+            alt="animal.."
+            href="phone.htm"
+            onclick="myFunction()"
+          />
+          <area
+            id="shape3"
+            shape="circle"
+            coords="337,300,44"
+            alt="animal.."
+            href="coffee.htm"
+            onclick="myFunction()"
+          />
+          <area
+            shape="poly"
+            coords="140,121,181,116,204,160,204,222,191,270,140,329,85,355,58,352,37,322,40,259,103,161,128,147"
+            href="croissant.htm"
+            onclick="myFunction()"
+          />
+        </map>
+      </div>
+<!-- side image ............. -->
+        <div>
+          <img
+            src="https://i.dlpng.com/static/png/6379450_preview.png"
+            class="side-img-left"
+          />
+        </div>
+      </div>
+
+    </div>
+    <script>
+      function myFunction() {
+        alert("clicked here");
+      }
+    </script>
+  </body>
+</html>
