@@ -1,0 +1,11 @@
+.card {
+    display: grid;
+    grid-template-columns: 500px;
+    grid-template-rows: 20px 200px 200px 20px;
+    grid-template-areas: "title" "images" "descriptions" "buttons";
+
+    border-radius: 18px;
+    background: white;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.9);
+    text-align: center;
+}
