@@ -17,6 +17,8 @@ const {
 
 const router = express.Router();
 
+
+
 /*********************************
  * LOGIN PAGE
  *********************************/
@@ -76,4 +78,4 @@ router.get('/badges/:name', (req, res) => {
 
 });
 
-module.exports.router = router;
+module.exports.routes = router;
