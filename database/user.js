@@ -6,7 +6,6 @@ const schema = new mongoose.Schema({
   password: String,
   badges: [{
     animal: String,
-    imageURL: String,
     amountDonated: Number,
   }]
 }, {

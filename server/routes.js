@@ -6,6 +6,7 @@ const {
   createUser,
   getApiImages,
   cachedImagesFunc,
+  getZooAnimals,
 } = require('./utils');
 const {
   User
@@ -59,32 +60,19 @@ router.post('/login', (req, res) => {
 // TODO: TEST THIS ROUTE
 router.get('/info/:animal', (req, res) => {
   const animal = xss(req.params.animal);
-  // Append response with images
-  const cachedImages = cachedImagesFunc(animal);
-  if (cachedImages) {
-    res.data.images = cachedImages;
-  } else {
-    getApiImages(animal)
-      .then((images) => {
-        res.data.images = images;
-      })
-      .catch((error) => {
-        res.data.images = {
-          "error": error
-        };
+  imageSearch(animal, res)
+    .then(() => {
+      Animal.findOne({
+        animal
+      }, (err, animal) => {
+        if (err || !animal) {
+          res.status(500).send(err);
+        } else {
+          res.status(200).send(animal);
+        }
       });
-  }
-  // Find animal in database
-  Animal.findOne({
-    animal
-  }, (err, animal) => {
-    if (err || !animal) {
-      res.status(500).send(err);
-    } else {
-      res.status(200).send(animal);
-    }
-  });
-
+    })
+    .catch((err) => res.status(500).send(err));
 });
 /*********************************
  * VIDEOS PAGE
@@ -95,7 +83,23 @@ router.get('/videos/:animal', (req, res) => {
 /*********************************
  * BADGES PAGE
  *********************************/
+// TODO: Test this route
 router.get('/badges/:name', (req, res) => {
+  const name = xss(req.params.name);
+  User.findOne({
+    name
+  }, (err, user) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      getZooAnimals().map((animal) => {
+        let images = {};
+        imageSearch(animal, images);
+        user.badges.images = images;
+      })
+      res.status(200).send(user.badges);
+    }
+  })
 
 });
 
@@ -104,23 +108,31 @@ router.get('/badges/:name', (req, res) => {
  * Description: This route looks for a cached store of image urls
  * before sending a request to Unsplash API to reduce API count
  *********************************/
-router.get('/image/:name', (req, res) => {
-  const name = req.params.name;
-  const cachedImages = cachedImagesFunc(name);
-  if (cachedImages) {
-    res.status(200).send(cachedImages);
-  } else {
-    getApiImages(name)
-      .then((images) => {
-        res.status(200).send(images);
-      })
-      .catch((error) => {
-        res.status(500).send({
-          "error": error
-        });
-      });
-  }
+// TODO: Retest this route after refactor
+router.get('/image/:animal', (req, res) => {
+  const animal = xss(req.params.animal);
+  imageSearch(animal, res)
+    .then((response) => res.status(200).send(response))
+    .catch((err) => res.status(500).send(err));
 });
 
+async function imageSearch(animal, res) {
+  const cachedImages = cachedImagesFunc(animal);
+  if (cachedImages) {
+    res.data.images = cachedImages;
+  } else {
+    return getApiImages(animal)
+      .then((images) => {
+        res.data.images = images;
+        return res;
+      })
+      .catch((error) => {
+        res.data.images = {
+          "error": error
+        };
+        return res;
+      });
+  }
+}
 
 module.exports = router;
