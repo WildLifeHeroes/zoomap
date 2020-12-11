@@ -56,24 +56,25 @@ function cachedImagesFunc(name) {
  ******************************************************/
 async function getApiImages(name) {
   const url = `https://api.unsplash.com/photos/random/?query=${name}`;
-  return axios.get(url, {
+  const images = await axios.get(url, {
       "headers": {
         "Accept-Version": "v1",
-        "Authorization": process.env.unSplashKey
+        "Authorization": `Client-ID ${process.env.unSplashKey}`
       }
     })
     .then(res => {
-      cache.name = res;
-      res.default = false;
-      return res;
+      cache.name = res.data;
+      cache.name.default = false;
+      return cache.name;
     })
-    .catch(() => {
+    .catch((error) => {
       const defaultResponse = {
         "image": "public/assets/images/brian-mcgowan-weY3ecoNSZw-unsplash.jpg",
         "default": true
       }
       return defaultResponse;
     });
+  return images;
 }
 
 

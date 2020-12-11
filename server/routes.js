@@ -5,6 +5,7 @@ const {
   validatePassword,
   createUser,
   getApiImages,
+  cachedImagesFunc,
 } = require('./utils');
 const {
   User
