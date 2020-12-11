@@ -77,10 +77,16 @@ async function getApiImages(name) {
   return images;
 }
 
+function getZooAnimals() {
+  const animals = [elephant, hippo];
+  return animals;
+}
+
 module.exports = {
   validatePassword,
   validateName,
   createUser,
   getApiImages,
   cachedImagesFunc,
+  getZooAnimals,
 }

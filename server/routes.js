@@ -6,6 +6,7 @@ const {
   createUser,
   getApiImages,
   cachedImagesFunc,
+  getZooAnimals,
 } = require('./utils');
 const {
   User
@@ -82,15 +83,20 @@ router.get('/videos/:animal', (req, res) => {
 /*********************************
  * BADGES PAGE
  *********************************/
+// TODO: Test this route
 router.get('/badges/:name', (req, res) => {
   const name = xss(req.params.name);
-
   User.findOne({
     name
   }, (err, user) => {
     if (err) {
       res.status(500).send(err);
     } else {
+      getZooAnimals().map((animal) => {
+        let images = {};
+        imageSearch(animal, images);
+        user.badges.images = images;
+      })
       res.status(200).send(user.badges);
     }
   })
@@ -128,6 +134,5 @@ async function imageSearch(animal, res) {
       });
   }
 }
-
 
 module.exports = router;
