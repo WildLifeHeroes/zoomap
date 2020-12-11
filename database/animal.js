@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
   name: String,
-  imageUrl: String,
   habitatImageUrl: String,
   info: String,
   moreInfoUrl: String,
