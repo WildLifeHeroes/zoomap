@@ -58,6 +58,7 @@ router.post('/login', (req, res) => {
  * INFO PAGE
  *********************************/
 // TODO: TEST THIS ROUTE
+// TODO: Normalize input
 router.get('/info/:animal', (req, res) => {
   const animal = xss(req.params.animal);
   imageSearch(animal, res)
@@ -84,6 +85,7 @@ router.get('/videos/:animal', (req, res) => {
  * BADGES PAGE
  *********************************/
 // TODO: Add promise rejection handling
+// TODO: Normalize input
 router.get('/badges/:name', (req, res) => {
   const name = xss(req.params.name);
   User.findOne({
@@ -102,7 +104,7 @@ router.get('/badges/:name', (req, res) => {
           const promiseArray = animals.map((animal) => {
             return imageSearch(animal.name)
               .then(imgs => {
-                images[animal] = imgs;
+                images[animal.name] = imgs;
               })
               .catch((err) => {
                 console.log(err);
@@ -127,6 +129,7 @@ router.get('/badges/:name', (req, res) => {
  * Description: This route looks for a cached store of image urls
  * before sending a request to Unsplash API to reduce API count
  *********************************/
+// TODO: Normalize input
 router.get('/image/:animal', (req, res) => {
   const animal = xss(req.params.animal);
   imageSearch(animal, res)
@@ -138,14 +141,14 @@ async function imageSearch(animal) {
   const cachedImages = cachedImagesFunc(animal);
   if (cachedImages) {
     return {
-      "images": cachedImages
+      "images": cachedImages.urls.regular
     };
   } else {
     animal = animal.replace(/_/g, ' ');
     return getApiImages(animal)
       .then((images) => {
         return {
-          images
+          "images": images.urls.regular
         };
       })
       .catch(() => {
