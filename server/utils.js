@@ -56,7 +56,7 @@ function cachedImagesFunc(name) {
  ******************************************************/
 async function getApiImages(name) {
   const url = `https://api.unsplash.com/photos/random/?query=${name}`;
-  const images = await axios.get(url, {
+  const images = axios.get(url, {
       "headers": {
         "Accept-Version": "v1",
         "Authorization": `Client-ID ${process.env.unSplashKey}`

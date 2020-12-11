@@ -61,15 +61,18 @@ router.post('/login', (req, res) => {
 // TODO: Normalize input
 router.get('/info/:animal', (req, res) => {
   const animal = xss(req.params.animal);
-  imageSearch(animal, res)
-    .then(() => {
+  imageSearch(animal)
+    .then((img) => {
       Animal.findOne({
-        animal
-      }, (err, animal) => {
-        if (err || !animal) {
+        "name": animal
+      }, (err, anim) => {
+        if (err || !anim) {
           res.status(500).send(err);
         } else {
-          res.status(200).send(animal);
+          let response = {};
+          response.images = img;
+          response.animal = anim;
+          res.status(200).send(response);
         }
       });
     })
@@ -144,7 +147,7 @@ async function imageSearch(animal) {
       "images": cachedImages.urls.regular
     };
   } else {
-    animal = animal.replace(/_/g, ' ');
+    animal = animal.replace(/_/g, '%20');
     return getApiImages(animal)
       .then((images) => {
         return {
