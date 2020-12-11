@@ -14,11 +14,12 @@ const schema = new mongoose.Schema({
 });
 
 schema.methods.generateHash = function (password) {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(process.env.SALT), null);
+  const hash = bcrypt.hashSync(password, parseInt(process.env.SALT));
+  return hash;
 };
 
 schema.methods.validPassword = function (password) {
   return bcrypt.compareSync(password, this.password);
 };
 
-module.exports.User = mongoose.model('User', schema);
+module.exports.User = mongoose.model('Users', schema);

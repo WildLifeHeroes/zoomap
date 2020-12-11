@@ -1,4 +1,4 @@
-const express = require('express');
+const router = require('express').Router();
 const xss = require('xss');
 const {
   validateName,
@@ -15,10 +15,6 @@ const {
   db
 } = require('../database');
 
-const router = express.Router();
-
-
-
 /*********************************
  * LOGIN PAGE
  *********************************/
@@ -28,13 +24,13 @@ router.get('/login', (req, res) => {
 
 // Expects {name: '', password:''}
 router.post('/login', (req, res) => {
-  const name = validateName(xss(req.params.name));
-  const password = validatePassword(xss(req.params.password));
+  const name = validateName(xss(req.body.name));
+  const password = validatePassword(xss(req.body.password));
   if (name && password) {
     User.findOne({
       name
     }, (err, user) => {
-      if (err) {
+      if (err || !user) {
         createUser(name, password)
           .then((user) => res.status(201).send({
             "message": "New user created",
@@ -47,7 +43,7 @@ router.post('/login', (req, res) => {
             "error": error
           }));
       } else {
-        if (User.generateHash(password) === user.password) {
+        if (user.validPassword(password)) {
           res.status(200).send(user);
         } else {
           res.status(400).send({
@@ -78,4 +74,4 @@ router.get('/badges/:name', (req, res) => {
 
 });
 
-module.exports.routes = router;
+module.exports = router;
