@@ -77,8 +77,6 @@ async function getApiImages(name) {
   return images;
 }
 
-
-
 module.exports = {
   validatePassword,
   validateName,

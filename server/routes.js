@@ -56,7 +56,34 @@ router.post('/login', (req, res) => {
 /*********************************
  * INFO PAGE
  *********************************/
+// TODO: TEST THIS ROUTE
 router.get('/info/:animal', (req, res) => {
+  const animal = xss(req.params.animal);
+  // Append response with images
+  const cachedImages = cachedImagesFunc(animal);
+  if (cachedImages) {
+    res.data.images = cachedImages;
+  } else {
+    getApiImages(animal)
+      .then((images) => {
+        res.data.images = images;
+      })
+      .catch((error) => {
+        res.data.images = {
+          "error": error
+        };
+      });
+  }
+  // Find animal in database
+  Animal.findOne({
+    animal
+  }, (err, animal) => {
+    if (err || !animal) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(animal);
+    }
+  });
 
 });
 /*********************************
