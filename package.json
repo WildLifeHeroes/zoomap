@@ -21,6 +21,7 @@
     "morgan": "^1.10.0"
   },
   "dependencies": {
+    "axios": "^0.21.0",
     "bcrypt": "^5.0.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",

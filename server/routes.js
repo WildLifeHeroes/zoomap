@@ -4,6 +4,8 @@ const {
   validateName,
   validatePassword,
   createUser,
+  getApiImages,
+  cachedImagesFunc,
 } = require('./utils');
 const {
   User
@@ -18,10 +20,6 @@ const {
 /*********************************
  * LOGIN PAGE
  *********************************/
-router.get('/login', (req, res) => {
-
-});
-
 // Expects {name: '', password:''}
 router.post('/login', (req, res) => {
   const name = validateName(xss(req.body.name));
@@ -73,5 +71,29 @@ router.get('/videos/:animal', (req, res) => {
 router.get('/badges/:name', (req, res) => {
 
 });
+
+/*********************************
+ * STILL IMAGES
+ * Description: This route looks for a cached store of image urls
+ * before sending a request to Unsplash API to reduce API count
+ *********************************/
+router.get('/image/:name', (req, res) => {
+  const name = req.params.name;
+  const cachedImages = cachedImagesFunc(name);
+  if (cachedImages) {
+    res.status(200).send(cachedImages);
+  } else {
+    getApiImages(name)
+      .then((images) => {
+        res.status(200).send(images);
+      })
+      .catch((error) => {
+        res.status(500).send({
+          "error": error
+        });
+      });
+  }
+});
+
 
 module.exports = router;
