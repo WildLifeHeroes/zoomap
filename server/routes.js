@@ -83,54 +83,75 @@ router.get('/videos/:animal', (req, res) => {
 /*********************************
  * BADGES PAGE
  *********************************/
-// TODO: Test this route
+// TODO: Add promise rejection handling
 router.get('/badges/:name', (req, res) => {
   const name = xss(req.params.name);
   User.findOne({
     name
-  }, (err, user) => {
+  }, cb);
+
+  let responseObj = {};
+  let images = {};
+
+  function cb(err, user) {
     if (err) {
       res.status(500).send(err);
     } else {
-      getZooAnimals().map((animal) => {
-        let images = {};
-        imageSearch(animal, images);
-        user.badges.images = images;
-      })
-      res.status(200).send(user.badges);
+      getZooAnimals()
+        .then((animals) => {
+          const promiseArray = animals.map((animal) => {
+            return imageSearch(animal.name)
+              .then(imgs => {
+                images[animal] = imgs;
+              })
+              .catch((err) => {
+                console.log(err);
+                res.status(400).send({});
+              })
+          });
+          Promise.allSettled(promiseArray)
+            .then(() => {
+              responseObj["images"] = images;
+              responseObj["badges"] = user.badges;
+              res.status(200).send(responseObj);
+            });
+        })
     }
-  })
-
+  }
 });
+
+
 
 /*********************************
  * STILL IMAGES
  * Description: This route looks for a cached store of image urls
  * before sending a request to Unsplash API to reduce API count
  *********************************/
-// TODO: Retest this route after refactor
 router.get('/image/:animal', (req, res) => {
   const animal = xss(req.params.animal);
   imageSearch(animal, res)
     .then((response) => res.status(200).send(response))
-    .catch((err) => res.status(500).send(err));
+    .catch((response) => res.status(500).send(response));
 });
 
-async function imageSearch(animal, res) {
+async function imageSearch(animal) {
   const cachedImages = cachedImagesFunc(animal);
   if (cachedImages) {
-    res.data.images = cachedImages;
+    return {
+      "images": cachedImages
+    };
   } else {
+    animal = animal.replace(/_/g, ' ');
     return getApiImages(animal)
       .then((images) => {
-        res.data.images = images;
-        return res;
-      })
-      .catch((error) => {
-        res.data.images = {
-          "error": error
+        return {
+          images
         };
-        return res;
+      })
+      .catch(() => {
+        return {
+          "images": null
+        };
       });
   }
 }

@@ -77,9 +77,8 @@ async function getApiImages(name) {
   return images;
 }
 
-function getZooAnimals() {
-  const animals = [elephant, hippo];
-  return animals;
+async function getZooAnimals() {
+  return await Animal.find({}, 'name').then(res => res).catch(err => err);
 }
 
 module.exports = {
