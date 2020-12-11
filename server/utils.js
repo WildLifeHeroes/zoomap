@@ -23,13 +23,18 @@ const validatePassword = (password) => {
 }
 
 const createUser = async function (name, password) {
-  const new_user = new User({
-    name,
-    password,
+  const newUser = new User({
+    name
   });
-  new_user.password = new_user.generateHash(password);
-  const saved = new_user.save();
-  return saved;
+  newUser.password = newUser.generateHash(password);
+  newUser.save()
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+      return error;
+    });
 };
 
 module.exports = {
