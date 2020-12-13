@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const xss = require('xss');
-const util = require('./utils');
+const util = require('./utils').util;
 const {
   User
 } = require('../database/user');
@@ -50,11 +50,9 @@ router.post('/login', (req, res) => {
 /*********************************
  * INFO PAGE
  *********************************/
-// TODO: TEST THIS ROUTE
-// TODO: Normalize input
 router.get('/info/:animal', (req, res) => {
-  const animal = xss(req.params.animal);
-  util.imageSearch(animal)
+  const animal = req.params.animal.toLowerCase();
+  imageSearch(animal)
     .then((img) => {
       Animal.findOne({
         "name": animal
@@ -75,7 +73,7 @@ router.get('/info/:animal', (req, res) => {
  * VIDEOS PAGE
  *********************************/
 router.get('/videos/:animal', (req, res) => {
-  const animal = req.params.animal;
+  const animal = req.params.animal.toLowerCase();
   util.fetchVideos(animal)
     .then(videos => {
       res.status(200).send(videos);
@@ -85,10 +83,8 @@ router.get('/videos/:animal', (req, res) => {
 /*********************************
  * BADGES PAGE
  *********************************/
-// TODO: Add promise rejection handling
-// TODO: Normalize input
 router.get('/badges/:name', (req, res) => {
-  const name = xss(req.params.name);
+  const name = req.params.name.toLowerCase();;
   User.findOne({
     name
   }, cb);
@@ -103,7 +99,7 @@ router.get('/badges/:name', (req, res) => {
       util.getZooAnimals()
         .then((animals) => {
           const promiseArray = animals.map((animal) => {
-            return util.imageSearch(animal.name)
+            return imageSearch(animal.name)
               .then(imgs => {
                 images[animal.name] = imgs;
               })
@@ -116,22 +112,21 @@ router.get('/badges/:name', (req, res) => {
               responseObj["images"] = images;
               responseObj["badges"] = user.badges;
               res.status(200).send(responseObj);
-            });
+            })
+            .catch((err) => res.status(500).send(err));
         })
+        .catch((err) => res.status(500).send(err));
     }
   }
 });
-
-
 
 /*********************************
  * STILL IMAGES
  * Description: This route looks for a cached store of image urls
  * before sending a request to Unsplash API to reduce API count
  *********************************/
-// TODO: Normalize input
 router.get('/image/:animal', (req, res) => {
-  const animal = xss(req.params.animal);
+  const animal = req.params.animal.toLowerCase();
   imageSearch(animal, res)
     .then((response) => res.status(200).send(response))
     .catch((response) => res.status(500).send(response));

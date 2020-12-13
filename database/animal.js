@@ -5,7 +5,6 @@ const schema = new mongoose.Schema({
   habitatImageUrl: String,
   info: String,
   moreInfoUrl: String,
-  videos: Array,
 }, {
   timestamps: true,
 });
