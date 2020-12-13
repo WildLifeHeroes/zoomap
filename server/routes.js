@@ -1,13 +1,6 @@
 const router = require('express').Router();
 const xss = require('xss');
-const {
-  validateName,
-  validatePassword,
-  createUser,
-  getApiImages,
-  cachedImagesFunc,
-  getZooAnimals,
-} = require('./utils');
+const util = require('./utils').util;
 const {
   User
 } = require('../database/user');
@@ -23,14 +16,14 @@ const {
  *********************************/
 // Expects {name: '', password:''}
 router.post('/login', (req, res) => {
-  const name = validateName(xss(req.body.name));
-  const password = validatePassword(xss(req.body.password));
+  const name = util.validateName(xss(req.body.name));
+  const password = util.validatePassword(xss(req.body.password));
   if (name && password) {
     User.findOne({
       name
     }, (err, user) => {
       if (err || !user) {
-        createUser(name, password)
+        util.createUser(name, password)
           .then((user) => res.status(201).send({
             "message": "New user created",
             "user": user,
@@ -57,10 +50,8 @@ router.post('/login', (req, res) => {
 /*********************************
  * INFO PAGE
  *********************************/
-// TODO: TEST THIS ROUTE
-// TODO: Normalize input
 router.get('/info/:animal', (req, res) => {
-  const animal = xss(req.params.animal);
+  const animal = req.params.animal.toLowerCase();
   imageSearch(animal)
     .then((img) => {
       Animal.findOne({
@@ -82,15 +73,18 @@ router.get('/info/:animal', (req, res) => {
  * VIDEOS PAGE
  *********************************/
 router.get('/videos/:animal', (req, res) => {
-
+  const animal = req.params.animal.toLowerCase();
+  util.fetchVideos(animal)
+    .then(videos => {
+      res.status(200).send(videos);
+    })
+    .catch(err => res.status(400).send(err));
 });
 /*********************************
  * BADGES PAGE
  *********************************/
-// TODO: Add promise rejection handling
-// TODO: Normalize input
 router.get('/badges/:name', (req, res) => {
-  const name = xss(req.params.name);
+  const name = req.params.name.toLowerCase();;
   User.findOne({
     name
   }, cb);
@@ -102,15 +96,14 @@ router.get('/badges/:name', (req, res) => {
     if (err) {
       res.status(500).send(err);
     } else {
-      getZooAnimals()
+      util.getZooAnimals()
         .then((animals) => {
           const promiseArray = animals.map((animal) => {
             return imageSearch(animal.name)
               .then(imgs => {
                 images[animal.name] = imgs;
               })
-              .catch((err) => {
-                console.log(err);
+              .catch(() => {
                 res.status(400).send({});
               })
           });
@@ -119,36 +112,35 @@ router.get('/badges/:name', (req, res) => {
               responseObj["images"] = images;
               responseObj["badges"] = user.badges;
               res.status(200).send(responseObj);
-            });
+            })
+            .catch((err) => res.status(500).send(err));
         })
+        .catch((err) => res.status(500).send(err));
     }
   }
 });
-
-
 
 /*********************************
  * STILL IMAGES
  * Description: This route looks for a cached store of image urls
  * before sending a request to Unsplash API to reduce API count
  *********************************/
-// TODO: Normalize input
 router.get('/image/:animal', (req, res) => {
-  const animal = xss(req.params.animal);
+  const animal = req.params.animal.toLowerCase();
   imageSearch(animal, res)
     .then((response) => res.status(200).send(response))
     .catch((response) => res.status(500).send(response));
 });
 
 async function imageSearch(animal) {
-  const cachedImages = cachedImagesFunc(animal);
+  const cachedImages = util.cachedImagesFunc(animal);
   if (cachedImages) {
     return {
       "images": cachedImages.urls.regular
     };
   } else {
     animal = animal.replace(/_/g, '%20');
-    return getApiImages(animal)
+    return util.getApiImages(animal)
       .then((images) => {
         return {
           "images": images.urls.regular

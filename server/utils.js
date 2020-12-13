@@ -81,11 +81,21 @@ async function getZooAnimals() {
   return await Animal.find({}, 'name').then(res => res).catch(err => err);
 }
 
-module.exports = {
+async function fetchVideos(q) {
+  const url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=${process.env.pointDefianceChannel}&maxResults=5&q=${q}&key=${process.env.youTubeKey}`;
+  return axios.get(url)
+    .then(res => {
+      return res.data.items;
+    })
+    .catch(err => err);
+}
+
+module.exports.util = {
   validatePassword,
   validateName,
   createUser,
   getApiImages,
   cachedImagesFunc,
   getZooAnimals,
+  fetchVideos
 }
