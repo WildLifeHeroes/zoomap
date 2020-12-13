@@ -1,13 +1,6 @@
 const router = require('express').Router();
 const xss = require('xss');
-const {
-  validateName,
-  validatePassword,
-  createUser,
-  getApiImages,
-  cachedImagesFunc,
-  getZooAnimals,
-} = require('./utils');
+const util = require('./utils');
 const {
   User
 } = require('../database/user');
@@ -23,14 +16,14 @@ const {
  *********************************/
 // Expects {name: '', password:''}
 router.post('/login', (req, res) => {
-  const name = validateName(xss(req.body.name));
-  const password = validatePassword(xss(req.body.password));
+  const name = util.validateName(xss(req.body.name));
+  const password = util.validatePassword(xss(req.body.password));
   if (name && password) {
     User.findOne({
       name
     }, (err, user) => {
       if (err || !user) {
-        createUser(name, password)
+        util.createUser(name, password)
           .then((user) => res.status(201).send({
             "message": "New user created",
             "user": user,
@@ -61,7 +54,7 @@ router.post('/login', (req, res) => {
 // TODO: Normalize input
 router.get('/info/:animal', (req, res) => {
   const animal = xss(req.params.animal);
-  imageSearch(animal)
+  util.imageSearch(animal)
     .then((img) => {
       Animal.findOne({
         "name": animal
@@ -82,7 +75,12 @@ router.get('/info/:animal', (req, res) => {
  * VIDEOS PAGE
  *********************************/
 router.get('/videos/:animal', (req, res) => {
-
+  const animal = req.params.animal;
+  util.fetchVideos(animal)
+    .then(videos => {
+      res.status(200).send(videos);
+    })
+    .catch(err => res.status(400).send(err));
 });
 /*********************************
  * BADGES PAGE
@@ -102,15 +100,14 @@ router.get('/badges/:name', (req, res) => {
     if (err) {
       res.status(500).send(err);
     } else {
-      getZooAnimals()
+      util.getZooAnimals()
         .then((animals) => {
           const promiseArray = animals.map((animal) => {
-            return imageSearch(animal.name)
+            return util.imageSearch(animal.name)
               .then(imgs => {
                 images[animal.name] = imgs;
               })
-              .catch((err) => {
-                console.log(err);
+              .catch(() => {
                 res.status(400).send({});
               })
           });
@@ -141,14 +138,14 @@ router.get('/image/:animal', (req, res) => {
 });
 
 async function imageSearch(animal) {
-  const cachedImages = cachedImagesFunc(animal);
+  const cachedImages = util.cachedImagesFunc(animal);
   if (cachedImages) {
     return {
       "images": cachedImages.urls.regular
     };
   } else {
     animal = animal.replace(/_/g, '%20');
-    return getApiImages(animal)
+    return util.getApiImages(animal)
       .then((images) => {
         return {
           "images": images.urls.regular
