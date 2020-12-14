@@ -29,11 +29,8 @@ const createUser = async function (name, password) {
   });
   newUser.password = newUser.generateHash(password);
   newUser.save()
-    .then((response) => {
-      console.log(response);
-    })
+    .then(() => {})
     .catch((error) => {
-      console.log(error);
       return error;
     });
 };
