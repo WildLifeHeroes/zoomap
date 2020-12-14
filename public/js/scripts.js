@@ -8,6 +8,16 @@ const outterLoginContainer = document.querySelector("#outter_login_container");
 
 // used to close animal card if user click area outside of animal card or close button.
 window.addEventListener("click", (e) => {
+  closeEvent(e);
+});
+
+window.addEventListener('keypress', (e) => {
+  if (e.code = "Enter") {
+    closeEvent(e);
+  }
+})
+
+function closeEvent(e) {
   if (e.target == cardContainer || e.target == closeCardBtn) {
     cardWrapper.style.display = "none";
     clearImg();
@@ -16,7 +26,7 @@ window.addEventListener("click", (e) => {
   if (e.target == outterLoginContainer || e.target == loginContainer) {
     loginContainer.style.display = "none";
   }
-});
+}
 
 function getAnimal(e) {
   e.preventDefault(); // prevent default behaviors
@@ -96,6 +106,7 @@ function setCard_descriptions(info) {
 // show card upon click event triggered.
 function popCard(card) {
   card.style.display = "block";
+  document.getElementById("prev").focus();
 }
 
 function clearImg() {
