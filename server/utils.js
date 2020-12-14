@@ -1,6 +1,12 @@
-const { User } = require("../database/user");
-const { Animal } = require("../database/animal");
-const { db } = require("../database");
+const {
+  User
+} = require("../database/user");
+const {
+  Animal
+} = require("../database/animal");
+const {
+  db
+} = require("../database");
 const axios = require("axios");
 
 const validateName = (name) => {
@@ -22,13 +28,9 @@ const createUser = async function (name, password) {
     name,
   });
   newUser.password = newUser.generateHash(password);
-  newUser
-    .save()
-    .then((response) => {
-      console.log(response);
-    })
+  newUser.save()
+    .then(() => {})
     .catch((error) => {
-      console.log(error);
       return error;
     });
 };

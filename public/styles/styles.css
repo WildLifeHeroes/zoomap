@@ -139,6 +139,17 @@ form {
   display: none;
 }
 
+
 #welcomeMsg {
   padding: 0 20%;
+
+#video_container {
+  padding: 62px;
+  display: none;
+}
+
+.vid-style {
+  padding: 6px;
+  background-color: black;
+
 }

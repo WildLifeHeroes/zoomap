@@ -86,7 +86,7 @@ router.get('/videos/:animal', (req, res) => {
  * BADGES PAGE
  *********************************/
 router.get('/badges/:name', (req, res) => {
-  const name = req.params.name.toLowerCase();;
+  const name = req.params.name;;
   User.findOne({
     name
   }, cb);
@@ -105,8 +105,9 @@ router.get('/badges/:name', (req, res) => {
               .then(imgs => {
                 images[animal.name] = imgs;
               })
-              .catch(() => {
-                res.status(400).send({});
+              .catch((err) => {
+                console.log(err);
+                return new Error('image not found');
               })
           });
           Promise.allSettled(promiseArray)
@@ -121,6 +122,44 @@ router.get('/badges/:name', (req, res) => {
     }
   }
 });
+/*********************************
+ * DONATE
+ *********************************/
+router.patch('/donate/:name/:animal/:amount', (req, res) => {
+  const name = req.params.name;
+  const animal = req.params.animal.toLowerCase();
+  const amount = parseInt(req.params.amount);
+
+  User.findOne({
+      name
+    })
+    .then((user) => {
+      let badgeFound = false;
+      user.badges.forEach((badge) => {
+        console.log(badge);
+        if (badge.animal === animal) {
+          badge.amountDonated ? badge.amountDonated += amount : badge.amountDonated = amount;
+          badgeFound = true;
+        }
+      })
+      if (!badgeFound) {
+        user.badges.push({
+          animal,
+          amountDonated: amount
+        })
+      }
+      User.findOneAndUpdate({
+          name
+        }, {
+          badges: user.badges
+        }, {
+          new: true
+        })
+        .then((user) => res.send(user.badges))
+        .catch((err) => res.status(500).send(err));
+    })
+    .catch((err) => res.status(401).send(err));
+});
 
 /*********************************
  * STILL IMAGES
@@ -129,7 +168,7 @@ router.get('/badges/:name', (req, res) => {
  *********************************/
 router.get('/image/:animal', (req, res) => {
   const animal = req.params.animal.toLowerCase();
-  imageSearch(animal, res)
+  imageSearch(animal)
     .then((response) => res.status(200).send(response))
     .catch((response) => res.status(500).send(response));
 });
@@ -144,11 +183,18 @@ async function imageSearch(animal) {
     animal = animal.replace(/_/g, '%20');
     return util.getApiImages(animal)
       .then((images) => {
-        return {
-          "images": images.urls.regular
-        };
+        if (!images.default) {
+          return {
+            "images": images.urls.regular
+          };
+        } else {
+          return {
+            "images": images.image
+          }
+        }
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err);
         return {
           "images": null
         };
