@@ -6,6 +6,9 @@ const cardContainer = document.querySelector(".card_container");
 const closeCardBtn = document.querySelector(".close_btn");
 const outterLoginContainer = document.querySelector("#outter_login_container");
 
+/*********************************
+ * util listener
+ *********************************/
 // used to close animal card if user click area outside of animal card or close button.
 window.addEventListener("click", (e) => {
   if (
@@ -21,6 +24,40 @@ window.addEventListener("click", (e) => {
     loginContainer.style.display = "none";
   }
 });
+
+/*********************************
+ * Login and register
+ *********************************/
+const loginContainer = document.querySelector("#login_container");
+
+function loginFunc() {
+  loginContainer.style.display = "block";
+}
+
+function doPost(e) {
+  // Prevent form from submitting to the server
+  e.preventDefault();
+  let form = document.querySelector("#sign_in_form");
+  serializeForm(form);
+  console.log(serializeForm(form));
+}
+
+function serializeForm(form) {
+  var obj = {};
+  var formData = new FormData(form);
+  for (var key of formData.keys()) {
+    obj[key] = formData.get(key);
+  }
+  return obj;
+}
+
+/*********************************
+ * Login and register end
+ *********************************/
+
+/*********************************
+ * util listener end
+ *********************************/
 
 function getAnimal(e) {
   e.preventDefault(); // prevent default behaviors
@@ -116,17 +153,4 @@ function getCard_Wrapper() {
 
 /*********************************
  * Animal Card End
- *********************************/
-
-/*********************************
- * Login and register
- *********************************/
-const loginContainer = document.querySelector("#login_container");
-
-function loginFunc() {
-  loginContainer.style.display = "block";
-}
-
-/*********************************
- * Login and register end
  *********************************/
