@@ -139,3 +139,12 @@ form {
   display: none;
 }
 
+#video_container {
+  padding: 62px;
+  display: none;
+}
+
+.vid-style {
+  padding: 10px;
+  background-color: black;
+}

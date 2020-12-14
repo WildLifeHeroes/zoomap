@@ -1,13 +1,3 @@
-// const animalSeal = document.getElementById("seal");
-// const animalFox = document.getElementById("fox");
-// const animalSeaLion = document.getElementById("sea_lion");
-// const animalWolf = document.getElementById("wolf");
-// const animalLemur = document.getElementById("lemur");
-// const animalShark1 = document.getElementById("shark1");
-// const animalShark2 = document.getElementById("shark2");
-// const animalTiger = document.getElementById("tiger");
-// const animalLeopard = document.getElementById("leopard");
-
 /*********************************
  * Animal Card
  *********************************/
@@ -28,7 +18,7 @@ function infoRequest(e) {
 
 function urlBuilder(title) {
   // building the API endpoint URL
-  const baseUrl = "http://localhost:3000/info/";
+  const baseUrl = "http://localhost:3000/info/"; //videos
   const queryTerm = title;
   const endPointUrl = `${baseUrl}${queryTerm}`;
   callingAPI(endPointUrl);
@@ -42,6 +32,7 @@ function callingAPI(url) {
       // handle success
       const animalBack = response.data;
       console.log(animalBack);
+
       setCard(
         // send data to make card relevent to the animal
         animalBack.images.images,
@@ -210,4 +201,66 @@ function makeCard_Wrapper() {
 
 /*********************************
  * Animal Card End
+ *********************************/
+
+/*********************************
+ * Animal Videos
+ *********************************/
+const animalVids = document.getElementById("video_container");
+function videoDisplay(vidArray) {
+  const video1 = document.getElementById("vid1");
+  const video2 = document.getElementById("vid2");
+  const video3 = document.getElementById("vid3");
+  const video4 = document.getElementById("vid4");
+  const video5 = document.getElementById("vid5");
+  baseUrl = "https://www.youtube.com/embed/";
+  video1.src = baseUrl + vidArray[0];
+  console.log("video1" + video1.src);
+  video2.src = baseUrl + vidArray[1];
+  video3.src = baseUrl + vidArray[2];
+  video4.src = baseUrl + vidArray[3];
+  video5.src = baseUrl + vidArray[4];
+  animalVids.style.display = "block"; //display entire video container to the page.
+}
+
+//when video button is clicked call request video method.
+function getVideos(event) {
+  event.preventDefault();
+  console.log("video event listener");
+  animalRequest(event);
+}
+
+function animalRequest() {
+  const n = document.getElementById("animal_name");
+  let animal = n.textContent;
+  console.dir(animal);
+  urlBuilderVids(animal);
+}
+function urlBuilderVids(animal) {
+  // building the API endpoint URL
+  const baseUrl = "http://localhost:3000/videos/"; //videos
+  const endPointUrl = `${baseUrl}${animal}`;
+  console.log(endPointUrl);
+  getVideosApi(endPointUrl);
+}
+
+function getVideosApi(urlPath) {
+  axios
+    .get(urlPath)
+    .then(function (response) {
+      // handle success
+      const vidArray = [];
+      const animalVid = response.data;
+      animalVid.forEach((animal) => vidArray.push(animal.id.videoId));
+      console.log("animal video clickd " + animalVid);
+      console.log("vidArray" + vidArray);
+      videoDisplay(vidArray);
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    });
+}
+/*********************************
+ * Animal Videos end
  *********************************/

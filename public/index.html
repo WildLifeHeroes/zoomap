@@ -10,6 +10,7 @@
     <title>zoomap interactive</title>
   </head>
   <body>
+    <!-- main page -->
     <!-- navigation bar and it's content -->
     <nav class="nav">
       <a href="https://www.pdza.org/" target="_blank" class="logo">
@@ -305,6 +306,7 @@ even though everything is the same as the ones that work properly-->
       <div>
         <img src="assets/images/elephantColor.jpg" class="side-img-left" />
       </div>
+
       <!-- animal card start -->
       <div class="card_wrapper">
         <div class="card_container">
@@ -328,7 +330,9 @@ even though everything is the same as the ones that work properly-->
             </div>
             <div class="card_buttons padding10">
               <div id="prev" class="button">Prev</div>
-              <div id="video" class="button">Video</div>
+              <div id="video" class="button" onclick="getVideos(event)">
+                Video
+              </div>
               <div id="learn_more" class="button">Learn More</div>
               <div id="feed" class="button">Feed</div>
               <div id="next" class="button">Next</div>
@@ -338,6 +342,65 @@ even though everything is the same as the ones that work properly-->
       </div>
       <!-- animal card end -->
     </div>
+
+    <!-- videos start -->
+    <div id="video_container">
+      <h1>Videos</h1>
+      <hr />
+      <div class="videos">
+        <iframe
+          class="vid-style"
+          id="vid1"
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/videoId/"
+          frameborder="0"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+        <iframe
+          id="vid2"
+          class="vid-style"
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/videoId/"
+          frameborder="0"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+        <iframe
+          id="vid3"
+          class="vid-style"
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/videoId/"
+          frameborder="0"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+        <iframe
+          id="vid4"
+          class="vid-style"
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/videoId/"
+          frameborder="0"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+        <iframe
+          id="vid5"
+          class="vid-style"
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/videoId/"
+          frameborder="0"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+    <!-- videos end -->
 
     <!-- temporary log in form -->
     <div id="membership-popUp">
