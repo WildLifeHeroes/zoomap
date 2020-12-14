@@ -84,7 +84,7 @@ router.get('/videos/:animal', (req, res) => {
  * BADGES PAGE
  *********************************/
 router.get('/badges/:name', (req, res) => {
-  const name = req.params.name.toLowerCase();;
+  const name = req.params.name;;
   User.findOne({
     name
   }, cb);
@@ -103,8 +103,9 @@ router.get('/badges/:name', (req, res) => {
               .then(imgs => {
                 images[animal.name] = imgs;
               })
-              .catch(() => {
-                res.status(400).send({});
+              .catch((err) => {
+                console.log(err);
+                return new Error('image not found');
               })
           });
           Promise.allSettled(promiseArray)
@@ -180,11 +181,18 @@ async function imageSearch(animal) {
     animal = animal.replace(/_/g, '%20');
     return util.getApiImages(animal)
       .then((images) => {
-        return {
-          "images": images.urls.regular
-        };
+        if (!images.default) {
+          return {
+            "images": images.urls.regular
+          };
+        } else {
+          return {
+            "images": images.image
+          }
+        }
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err);
         return {
           "images": null
         };
