@@ -119,6 +119,44 @@ router.get('/badges/:name', (req, res) => {
     }
   }
 });
+/*********************************
+ * DONATE
+ *********************************/
+router.patch('/donate/:name/:animal/:amount', (req, res) => {
+  const name = req.params.name;
+  const animal = req.params.animal.toLowerCase();
+  const amount = parseInt(req.params.amount);
+
+  User.findOne({
+      name
+    })
+    .then((user) => {
+      let badgeFound = false;
+      user.badges.forEach((badge) => {
+        console.log(badge);
+        if (badge.animal === animal) {
+          badge.amountDonated ? badge.amountDonated += amount : badge.amountDonated = amount;
+          badgeFound = true;
+        }
+      })
+      if (!badgeFound) {
+        user.badges.push({
+          animal,
+          amountDonated: amount
+        })
+      }
+      User.findOneAndUpdate({
+          name
+        }, {
+          badges: user.badges
+        }, {
+          new: true
+        })
+        .then((user) => res.send(user.badges))
+        .catch((err) => res.status(500).send(err));
+    })
+    .catch((err) => res.status(401).send(err));
+});
 
 /*********************************
  * STILL IMAGES
