@@ -74,19 +74,25 @@ img {
   background-position: center;
   overflow: hidden;
   border-radius: 18px;
-  width: 180px;
-  height: 100%;
+  width: 200px; 
+  height: 200px;
 }
 
 #animal_thumnail {
   border-radius: 18px;
   margin-bottom: 0px !important; 
+  margin-top: 0;
+
 }
 
 .card_descriptions {
   grid-area: descriptions;
   /* border-bottom: 1px solid blue; */
   /* border-top: 1px solid blue; */
+}
+
+#animal_description {
+  padding: 20px auto;
 }
 
 .card_buttons {

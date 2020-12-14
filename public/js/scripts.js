@@ -70,9 +70,6 @@ function setCard(img, name, info) {
 
 // card setter.
 function setCard_Images(img) {
-  // let im = document.querySelector(".AnimalImg");
-  // let u = `"${img}"`;
-  // im.style.background = `url(${u})`;
   if (img !== null) {
     let imgContainer = document.querySelector(".AnimalImg");
     let theImg = document.createElement("img");
