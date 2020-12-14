@@ -39,16 +39,28 @@ function doPost(e) {
   e.preventDefault();
   let form = document.querySelector("#sign_in_form");
   serializeForm(form);
-  console.log(serializeForm(form));
 }
 
 function serializeForm(form) {
-  var obj = {};
-  var formData = new FormData(form);
-  for (var key of formData.keys()) {
+  let obj = {};
+  let formData = new FormData(form);
+  for (let key of formData.keys()) {
+    //obj[`"${key}"`] = formData.get(key);
     obj[key] = formData.get(key);
   }
-  return obj;
+  console.log(obj);
+  postAPI(obj);
+}
+
+function postAPI(obj) {
+  axios
+    .post("http://localhost:3000/login", obj)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
 
 /*********************************

@@ -18,6 +18,8 @@ const {
 router.post('/login', (req, res) => {
   const name = util.validateName(xss(req.body.name));
   const password = util.validatePassword(xss(req.body.password));
+  console.dir(name);
+  console.dir(password);
   if (name && password) {
     User.findOne({
       name
