@@ -8,7 +8,11 @@ const outterLoginContainer = document.querySelector("#outter_login_container");
 
 // used to close animal card if user click area outside of animal card or close button.
 window.addEventListener("click", (e) => {
-  if (e.target == cardContainer || e.target == closeCardBtn) {
+  if (
+    e.target == cardWrapper ||
+    e.target == cardContainer ||
+    e.target == closeCardBtn
+  ) {
     cardWrapper.style.display = "none";
     clearImg();
   }

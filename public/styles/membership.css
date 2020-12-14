@@ -1,4 +1,4 @@
-h1 {
+#sign_in_form h1 {
   font-weight: bold;
   margin: 0;
 }
@@ -45,7 +45,7 @@ button.ghost {
 }
 
 
-form {
+#sign_in_form {
   background-color: #ffffff;
   display: flex;
   align-items: center;
