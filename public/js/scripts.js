@@ -17,6 +17,7 @@ const closeCardBtn = document.querySelector(".close_btn");
 
 function getAnimal(e) {
   e.preventDefault(); // prevent default behaviors
+  clearImg();
   infoRequest(e); // fetch data, build card, pop display the card.
 }
 
@@ -42,6 +43,7 @@ function callingAPI(url) {
       // handle success
       const animalBack = response.data;
       console.log(animalBack);
+
       setCard(
         // send data to make card relevent to the animal
         animalBack.images.images,
@@ -70,16 +72,12 @@ function setCard(img, name, info) {
 
 // card setter.
 function setCard_Images(img) {
-  // let im = document.querySelector(".AnimalImg");
-  // let u = `"${img}"`;
-  // im.style.background = `url(${u})`;
   if (img !== null) {
     let imgContainer = document.querySelector(".AnimalImg");
     let theImg = document.createElement("img");
+    imgContainer.style.background = "none";
     theImg.setAttribute("id", "animal_thumnail");
     theImg.src = img;
-    // theImg.style.width = "180px";
-    // theImg.style.height = "180px";
     imgContainer.appendChild(theImg);
   }
 }
