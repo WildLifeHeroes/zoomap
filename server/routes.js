@@ -127,7 +127,7 @@ router.get('/badges/:name', (req, res) => {
  *********************************/
 router.get('/image/:animal', (req, res) => {
   const animal = req.params.animal.toLowerCase();
-  imageSearch(animal, res)
+  imageSearch(animal)
     .then((response) => res.status(200).send(response))
     .catch((response) => res.status(500).send(response));
 });
