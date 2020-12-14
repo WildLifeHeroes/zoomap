@@ -21,7 +21,7 @@ function getAnimal(e) {
 }
 
 function infoRequest(e) {
-  let animalTitle = e.target.id;
+  let animalTitle = e.target.title;
   console.log(animalTitle);
   urlBuilder(animalTitle); // get current animal
 }
