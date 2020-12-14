@@ -68,19 +68,20 @@ img {
   grid-area: images;
 }
 
-.img {
+.AnimalImg {
   background: url("https://www.pdza.org/wp-content/uploads/2018/04/KBYG-polar-bear-close.jpg");
   background-size: contain;
+  background-position: center;
   overflow: hidden;
   border-radius: 18px;
-  width: 180px;
-  height: 180px;
+  width: 150px;
+  height: 150px;
 }
 
 .card_descriptions {
   grid-area: descriptions;
-  border-bottom: 1px solid blue;
-  border-top: 1px solid blue;
+  /* border-bottom: 1px solid blue; */
+  /* border-top: 1px solid blue; */
 }
 
 .card_buttons {

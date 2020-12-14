@@ -1,34 +1,29 @@
-const {
-  User
-} = require('../database/user');
-const {
-  Animal
-} = require('../database/animal');
-const {
-  db
-} = require('../database');
-const axios = require('axios');
+const { User } = require("../database/user");
+const { Animal } = require("../database/animal");
+const { db } = require("../database");
+const axios = require("axios");
 
 const validateName = (name) => {
-  if (typeof name === 'string' && name.length > 5) {
+  if (typeof name === "string" && name.length > 5) {
     return name;
   }
   return null;
 };
 
 const validatePassword = (password) => {
-  if (typeof password === 'string' && password.length > 5) {
+  if (typeof password === "string" && password.length > 5) {
     return password;
   }
   return null;
-}
+};
 
 const createUser = async function (name, password) {
   const newUser = new User({
-    name
+    name,
   });
   newUser.password = newUser.generateHash(password);
-  newUser.save()
+  newUser
+    .save()
     .then((response) => {
       console.log(response);
     })
@@ -56,38 +51,43 @@ function cachedImagesFunc(name) {
  ******************************************************/
 async function getApiImages(name) {
   const url = `https://api.unsplash.com/photos/random/?query=${name}`;
-  const images = axios.get(url, {
-      "headers": {
+  const images = axios
+    .get(url, {
+      headers: {
         "Accept-Version": "v1",
-        "Authorization": `Client-ID ${process.env.unSplashKey}`
-      }
+        Authorization: `Client-ID ${process.env.unSplashKey}`,
+      },
     })
-    .then(res => {
+    .then((res) => {
       cache.name = res.data;
       cache.name.default = false;
       return cache.name;
     })
     .catch((error) => {
       const defaultResponse = {
-        "image": "public/assets/images/brian-mcgowan-weY3ecoNSZw-unsplash.jpg",
-        "default": true
-      }
+        image: "public/assets/images/brian-mcgowan-weY3ecoNSZw-unsplash.jpg",
+        default: true,
+      };
       return defaultResponse;
     });
   return images;
 }
 
 async function getZooAnimals() {
-  return await Animal.find({}, 'name').then(res => res).catch(err => err);
+  return await Animal.find({}, "name")
+    .then((res) => res)
+    .catch((err) => err);
 }
 
 async function fetchVideos(q) {
   const url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=${process.env.pointDefianceChannel}&maxResults=5&q=${q}&key=${process.env.youTubeKey}`;
-  return axios.get(url)
-    .then(res => {
+  console.log(url);
+  return axios
+    .get(url)
+    .then((res) => {
       return res.data.items;
     })
-    .catch(err => err);
+    .catch((err) => err);
 }
 
 module.exports.util = {
@@ -97,5 +97,5 @@ module.exports.util = {
   getApiImages,
   cachedImagesFunc,
   getZooAnimals,
-  fetchVideos
-}
+  fetchVideos,
+};
