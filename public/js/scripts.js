@@ -22,6 +22,7 @@ function getAnimal(e) {
 
 function infoRequest(e) {
   let animalTitle = e.target.id;
+  console.log(animalTitle);
   urlBuilder(animalTitle); // get current animal
 }
 
@@ -40,7 +41,7 @@ function callingAPI(url) {
     .then(function (response) {
       // handle success
       const animalBack = response.data;
-      // console.log(animalBack);
+      console.log(animalBack);
       setCard(
         // send data to make card relevent to the animal
         animalBack.images.images,
@@ -69,9 +70,18 @@ function setCard(img, name, info) {
 
 // card setter.
 function setCard_Images(img) {
-  let im = document.querySelector(".AnimalImg");
-  let u = `"${img}"`;
-  im.style.background = `url(${u})`;
+  // let im = document.querySelector(".AnimalImg");
+  // let u = `"${img}"`;
+  // im.style.background = `url(${u})`;
+  if (img !== null) {
+    let imgContainer = document.querySelector(".AnimalImg");
+    let theImg = document.createElement("img");
+    theImg.setAttribute("id", "animal_thumnail");
+    theImg.src = img;
+    // theImg.style.width = "180px";
+    // theImg.style.height = "180px";
+    imgContainer.appendChild(theImg);
+  }
 }
 
 function setCard_Title(name) {
@@ -93,11 +103,20 @@ function popCard(card) {
 window.addEventListener("click", (e) => {
   if (e.target == cardContainer) {
     cardWrapper.style.display = "none";
+    clearImg();
   }
   if (e.target == closeCardBtn) {
     cardWrapper.style.display = "none";
+    clearImg();
   }
 });
+
+function clearImg() {
+  if (document.querySelector("#animal_thumnail") !== null) {
+    let currentImg = document.querySelector("#animal_thumnail");
+    currentImg.remove();
+  }
+}
 
 // parent element generator.
 function makeCard_Wrapper() {
