@@ -1,3 +1,6 @@
+const host = "http://localhost:3000";
+let user = "Dustin"; // dynamically assign
+
 /*********************************
  * Animal Card
  *********************************/
@@ -5,49 +8,81 @@ const cardWrapper = document.querySelector(".card_wrapper");
 const cardContainer = document.querySelector(".card_container");
 const closeCardBtn = document.querySelector(".close_btn");
 const outterLoginContainer = document.querySelector("#outter_login_container");
+const prev = document.querySelector("#prev");
+const next = document.querySelector("#next");
+const feed = document.querySelector("#feed");
 
 // used to close animal card if user click area outside of animal card or close button.
 window.addEventListener("click", (e) => {
-  closeEvent(e);
+  clickOrPress(e);
 });
 
 window.addEventListener('keypress', (e) => {
   if (e.code = "Enter") {
-    closeEvent(e);
+    clickOrPress(e);
   }
 })
 
-function closeEvent(e) {
-  if (e.target == cardContainer || e.target == closeCardBtn) {
-    cardWrapper.style.display = "none";
-    clearImg();
-  }
-
-  if (e.target == outterLoginContainer || e.target == loginContainer) {
-    loginContainer.style.display = "none";
+function clickOrPress(e) {
+  switch (e.target) {
+    case cardContainer:
+    case closeCardBtn:
+      cardWrapper.style.display = "none";
+      clearImg();
+      break;
+    case outterLoginContainer:
+    case loginContainer:
+      loginContainer.style.display = "none";
+      break;
+    case prev:
+      getPrev();
+      break;
+    case next:
+      getNext();
+      break;
+    case feed:
+      displayBadges(e);
+      break;
+    default:
+      break;
   }
 }
+
+function displayBadges(e) {
+  clearImg();
+  const url = host + "/badges/" + user;
+  axios.get(url)
+    .then((res) => {
+      createBadges(res.data);
+    })
+    .catch((err) => res.status(500).send(err));
+}
+
+function createBadges(data) {
+  for (let animal of data.images) {
+
+  }
+}
+
+function getNext() {}
+
+function getPrev() {}
 
 function getAnimal(e) {
   e.preventDefault(); // prevent default behaviors
   clearImg();
-  infoRequest(e); // fetch data, build card, pop display the card.
+  urlBuilder(e.target.title, e); // fetch data, build card, pop display the card.
 }
 
-function infoRequest(e) {
-  let animalTitle = e.target.title;
-  urlBuilder(animalTitle); // get current animal
-}
-
-function urlBuilder(title) {
+function urlBuilder(title, e) {
   // building the API endpoint URL
-  const baseUrl = "http://localhost:3000/info/";
+  const baseUrl = host + "/info/";
   const queryTerm = title;
   const endPointUrl = `${baseUrl}${queryTerm}`;
   callingAPI(endPointUrl);
 }
 
-function callingAPI(url) {
+function callingAPI(url, e) {
   // Make a request for a user with a given ID
   axios
     .get(url)
@@ -59,7 +94,8 @@ function callingAPI(url) {
         // send data to make card relevent to the animal
         animalBack.images.images,
         animalBack.animal.name,
-        animalBack.animal.info
+        animalBack.animal.info,
+        e.target.tabIndex,
       );
     })
     .catch(function (error) {
@@ -69,7 +105,7 @@ function callingAPI(url) {
 }
 
 //initiate setting animal card.
-function setCard(img, name, info) {
+function setCard(img, name, info, tabIndex) {
   const card = getCard_Wrapper();
   const classname = "." + `${card.className}`;
   const target = document.querySelector(classname);
@@ -77,8 +113,7 @@ function setCard(img, name, info) {
   setCard_Images(img);
   setCard_Title(name);
   setCard_descriptions(info);
-
-  popCard(target);
+  popCard(target, tabIndex);
 }
 
 // card setter.
