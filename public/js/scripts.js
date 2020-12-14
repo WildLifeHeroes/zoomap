@@ -5,6 +5,74 @@ const cardWrapper = document.querySelector(".card_wrapper");
 const cardContainer = document.querySelector(".card_container");
 const closeCardBtn = document.querySelector(".close_btn");
 
+const outterLoginContainer = document.querySelector("#outter_login_container");
+
+/*********************************
+ * util listener
+ *********************************/
+// used to close animal card if user click area outside of animal card or close button.
+window.addEventListener("click", (e) => {
+  if (
+    e.target == cardWrapper ||
+    e.target == cardContainer ||
+    e.target == closeCardBtn
+  ) {
+    cardWrapper.style.display = "none";
+    clearImg();
+  }
+
+  if (e.target == outterLoginContainer || e.target == loginContainer) {
+    loginContainer.style.display = "none";
+  }
+});
+
+
+/*********************************
+ * Login and register
+ *********************************/
+const loginContainer = document.querySelector("#login_container");
+
+function loginFunc() {
+  loginContainer.style.display = "block";
+}
+
+function doPost(e) {
+  // Prevent form from submitting to the server
+  e.preventDefault();
+  let form = document.querySelector("#sign_in_form");
+  serializeForm(form);
+}
+
+function serializeForm(form) {
+  let obj = {};
+  let formData = new FormData(form);
+  for (let key of formData.keys()) {
+    //obj[`"${key}"`] = formData.get(key);
+    obj[key] = formData.get(key);
+  }
+  console.log(obj);
+  postAPI(obj);
+}
+
+function postAPI(obj) {
+  axios
+    .post("http://localhost:3000/login", obj)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+/*********************************
+ * Login and register end
+ *********************************/
+
+/*********************************
+ * util listener end
+ *********************************/
+
 function getAnimal(e) {
   e.preventDefault(); // prevent default behaviors
   infoRequest(e); // fetch data, build card, pop display the card.
@@ -119,6 +187,7 @@ function makeCard_Wrapper() {
 /*********************************
  * Animal Card End
  *********************************/
+
 
 /*********************************
  * Animal Videos

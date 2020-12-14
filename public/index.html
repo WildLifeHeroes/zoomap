@@ -41,7 +41,7 @@
     </nav>
 
     <h1>Welcome and enjoy your journey through the zoo</h1>
-    <p>
+    <p id="welcomeMsg">
       explore the map to discover various animals from point defiance zoo. Lorem
       ipsum, dolor sit amet consectetur adipisicing elit. Fugiat, deserunt.
       Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptates
@@ -343,6 +343,45 @@ even though everything is the same as the ones that work properly-->
       <!-- animal card end -->
     </div>
 
+    <!-- login&registration -->
+    <div id="login_container">
+      <div id="outter_login_container">
+        <div id="login_in_container">
+          <!-- <div class="close_loginForm">X</div> -->
+          <form
+            id="sign_in_form"
+            name="loginForm"
+            method="POST"
+          >
+            <h1>Become Member</h1>
+            <div class="social_container">
+              <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="social"
+                ><i class="fab fa-google-plus-g"></i
+              ></a>
+              <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <span>or use your account</span>
+            <input type="text" name="name" placeholder="Name" />
+            <!-- <input type="email" name="email" placeholder="Email" /> -->
+            <input type="password" name="password" placeholder="Password" />
+            <a href="#">Forgot your password?</a>
+            <button id="singInBtn" type="submit" onclick="doPost(event)">
+              Sign In
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- login&registration end-->
+    <footer>
+      <p>
+        Created with <i class="fa fa-heart"></i> by
+        <a target="_blank" href="#">Team One - Dustin, Aliona, Jason.</a>
+      </p>
+    </footer>
+
+
     <!-- videos start -->
     <div id="video_container">
       <h1>Videos</h1>
@@ -401,6 +440,7 @@ even though everything is the same as the ones that work properly-->
       </div>
     </div>
     <!-- videos end -->
+
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./js/main.js"></script>
