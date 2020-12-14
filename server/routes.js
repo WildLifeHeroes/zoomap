@@ -119,6 +119,26 @@ router.get('/badges/:name', (req, res) => {
     }
   }
 });
+/*********************************
+ * DONATE
+ *********************************/
+router.patch('/donate/:name/:amount', (req, res) => {
+  const name = req.params.name.toLowerCase();
+  const amount = parseInt(req.params.amount);
+
+  User.findOneAndUpdate({
+    name
+  }, {
+    amountDonated: amountDonated + amount
+  }, (err) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send('amount updated');
+    }
+  })
+
+})
 
 /*********************************
  * STILL IMAGES
