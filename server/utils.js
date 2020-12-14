@@ -1,6 +1,12 @@
-const { User } = require("../database/user");
-const { Animal } = require("../database/animal");
-const { db } = require("../database");
+const {
+  User
+} = require("../database/user");
+const {
+  Animal
+} = require("../database/animal");
+const {
+  db
+} = require("../database");
 const axios = require("axios");
 
 const validateName = (name) => {
