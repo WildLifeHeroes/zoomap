@@ -73,19 +73,27 @@ img {
   background-position: center;
   overflow: hidden;
   border-radius: 18px;
-  width: 180px;
-  height: 100%;
+  width: 200px; 
+  height: 200px;
 }
 
 #animal_thumnail {
   border-radius: 18px;
+<<<<<<< HEAD
   margin-bottom: 0px !important;
+=======
+  margin-bottom: 0px !important; 
+  margin-top: 0;
+
+>>>>>>> 9a76ff3a5db520d20e853570ea400b9ceffaed8a
 }
 
 .card_descriptions {
   grid-area: descriptions;
-  /* border-bottom: 1px solid blue; */
-  /* border-top: 1px solid blue; */
+}
+
+#animal_description {
+  margin: 40px auto;
 }
 
 .card_buttons {

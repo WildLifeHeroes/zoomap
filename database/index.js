@@ -4,6 +4,7 @@ const mongoUri = `mongodb+srv://${process.env.dbUserName}:${process.env.dbPasswo
 const dbC = mongoose.connect(mongoUri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useFindAndModify: false,
 });
 const dbConnection = mongoose.connection;
 dbConnection.on('error', console.error.bind(console, 'connection error: ')); // eslint-disable-line

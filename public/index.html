@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -22,264 +23,127 @@
       <a href="#map-img"
         ><h1 class="title">Virtual Point Defiance Zoo and Aquarium</h1></a
       >
+=======
+>>>>>>> 9a76ff3a5db520d20e853570ea400b9ceffaed8a
 
-      <ul>
-        <li>
-          <a class="nav-link" href="/">Welcome</a>
-        </li>
-        <li>
-          <!-- this link will guide user to membership page by its given id# -->
-          <a
-            class="nav-link active"
-            href="#membership-popUp"
-            onclick="loginFunc()"
-            ;
-            >Membership</a
-          >
-        </li>
-      </ul>
-    </nav>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+    crossorigin="anonymous" />
+  <link rel="stylesheet" href="styles/card.css" />
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/styles.css" />
+  <link rel="stylesheet" href="styles/membership.css" />
+  <title>zoomap interactive</title>
+</head>
 
-    <h1>Welcome and enjoy your journey through the zoo</h1>
-    <p>
-      explore the map to discover various animals from point defiance zoo. Lorem
-      ipsum, dolor sit amet consectetur adipisicing elit. Fugiat, deserunt.
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptates
-      perspiciatis quisquam ipsam numquam aliquam doloremque ad incidunt laborum
-      soluta nemo!
-    </p>
+<body>
+  <!-- navigation bar and it's content -->
+  <nav class="nav">
+    <a href="https://www.pdza.org/" target="_blank" class="logo">
+      <img src="https://pbs.twimg.com/profile_images/1075148407084216320/m2P5DN19_400x400.jpg" class="logo" />
+    </a>
+    <a href="#map-img">
+      <h1 class="title">Virtual Point Defiance Zoo and Aquarium</h1>
+    </a>
 
-    <!-- main image containter for main page -->
-    <div class="img-container">
-      <!-- side image ............. -->
-      <div>
-        <img src="assets/images/elephantColor.jpg" class="side-img-right" />
-      </div>
-      <!-- map -->
-      <div class="main-content">
-        <img
-          src="assets/images/PDZmap.jpg"
-          alt="Point Defiance Zoom Map"
-          usemap="#zoomap"
-          id="map-img"
-        />
-        <map name="zoomap" class="color-map">
-          <area
-            id="shark1"
-            alt="hammer-shark"
-            title="hammer_shark"
-            href=""
-            coords="418,120,15"
-            shape="circle"
-            onclick="getAnimal(event)"
-          />
-          <area
-            id="turtle"
-            alt="sea-turtle"
-            title="sea_turtle"
-            href=""
-            coords="421,120,15"
-            shape="circle"
-            onclick="getAnimal(event)"
-          />
-          <area
-            id="penguin"
-            alt="penguin"
-            title="penguin"
-            href=""
-            coords="634,183,15"
-            shape="circle"
-            onclick="getAnimal(event)"
-          />
-          <area
-            id="lemur"
-            alt="lemur"
-            title="lemur"
-            href=""
-            coords="456,394,23"
-            shape="circle"
-            onclick="getAnimal(event)"
-          />
-          <area
-            alt="animal1"
-            title="animal1"
-            href=""
-            coords="456,395,17"
-            shape="circle"
-          />
-          <!-- seal done -->
-          <area
-            id="seal"
-            alt="seal"
-            title="seal"
-            href=""
-            coords="246,136,14"
-            shape="circle"
-            onclick="getAnimal(event)"
-          />
+    <ul>
+      <li>
+        <a class="nav-link" href="/">Welcome</a>
+      </li>
+      <li>
+        <!-- this link will guide user to membership page by its given id# -->
+        <a class="nav-link active" href="#membership-popUp" onclick="loginFunc()" ;>Membership</a>
+      </li>
+    </ul>
+  </nav>
 
-          <!-- done oxen -->
-          <area
-            id="oxen"
-            alt="muskoxen"
-            title="muskoxen"
-            href=""
-            coords="128,373,15"
-            shape="circle"
-            onclick="getAnimal(event)"
-          />
-          <!-- fox done -->
-          <area
-            id="fox"
-            alt="artic-fox"
-            title="artic_fox"
-            href=""
-            coords="68,258,16"
-            shape="circle"
-            onclick="getAnimal(event)"
-          />
-          <!-- polar bear done -->
-          <area
-            id="polar_bear"
-            alt="polar-bear"
-            title="polar_bear"
-            href=""
-            coords="122,246,15"
-            shape="circle"
-            onclick="getAnimal(event)"
-          />
-          <!-- done sealion-->
-          <area
-            id="sea_lion"
-            alt="sea-lion"
-            title="sea_lion"
-            href=""
-            coords="270,124,15"
-            shape="circle"
-            onclick="getAnimal(event)"
-          />
-          <!-- otter done -->
-          <area
-            id="otter"
-            alt="otter"
-            title="otter"
-            href=""
-            coords="270,225,15"
-            shape="circle"
-            onclick="getAnimal(event)"
-          />
-          <!-- done walrus -->
-          <area
-            id="walrus"
-            alt="walrus"
-            title="walrus"
-            href=""
-            coords="348,186,16"
-            shape="circle"
-            onclick="getAnimal(event)"
-          />
-          <!-- puffins done -->
-          <area
-            id="puffins"
-            alt="puffins"
-            title="puffins"
-            href=""
-            coords="324,218,16"
-            shape="circle"
-            onclick="getAnimal(event)"
-          />
-          <!-- wolf done -->
-          <area
-            id="wolf"
-            alt="red-wolf"
-            title="red_wolf"
-            href=""
-            coords="300,294,16"
-            shape="circle"
-            onclick="getAnimal(event)"
-          />
+  <h1>Welcome and enjoy your journey through the zoo</h1>
+  <p>
+    explore the map to discover various animals from point defiance zoo. Lorem
+    ipsum, dolor sit amet consectetur adipisicing elit. Fugiat, deserunt.
+    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptates
+    perspiciatis quisquam ipsam numquam aliquam doloremque ad incidunt laborum
+    soluta nemo!
+  </p>
 
-          <!-- budgie done -->
-          <area
-            id="budgie"
-            alt="budgie-buddies"
-            title="budgie_buddies"
-            href=""
-            coords="801,249,15"
-            shape="circle"
-            onclick="getAnimal(event)"
-          />
-          <!-- shark2 done -->
-          <area
-            id="shark2"
-            alt="shark"
-            title="shark"
-            href=""
-            coords="808,289,15"
-            shape="circle"
-            onclick="getAnimal(event)"
-          />
-          <!-- ant-eater done -->
-          <area
-            id="ant_eater"
-            alt="ant-eater"
-            title="ant_eater"
-            href=""
-            coords="952,156,16"
-            shape="circle"
-            onclick="getAnimal(event)"
-          />
-          <!-- monkey done -->
-          <area
-            id="monkey"
-            alt="monkey"
-            title="monkey"
-            href=""
-            coords="950,226,15"
-            shape="circle"
-            onclick="getAnimal(event)"
-          />
-          <!-- leopard done -->
-          <area
-            id="leopard"
-            alt="clouded-leopard"
-            title="clouded_leopard"
-            href=""
-            coords="910,297,15"
-            shape="circle"
-            onclick="getAnimal(event)"
-          />
-          <!-- elephant done -->
-          <area
-            id="elephant"
-            alt="asian-elephant"
-            title="asian_elephant"
-            href=""
-            coords="1010,337,15"
-            shape="circle"
-            onclick="getAnimal(event)"
-          />
-          <!-- tiger done -->
-          <area
-            id="tiger"
-            alt="tiger"
-            title="tiger"
-            href=""
-            coords="1082,208,15"
-            shape="circle"
-            onclick="getAnimal(event)"
-          />
-          <!-- has right cordinates but selected by border only for some reason 
+  <!-- main image containter for main page -->
+  <div class="img-container">
+    <!-- side image ............. -->
+    <div>
+      <img src="assets/images/elephantColor.jpg" class="side-img-right" />
+    </div>
+    <!-- map -->
+    <div class="main-content">
+      <img src="assets/images/PDZmap.jpg" alt="Point Defiance Zoom Map" usemap="#zoomap" id="map-img" />
+      <map name="zoomap" class="color-map">
+        <area id="shark1" alt="hammer-shark" title="hammer_shark" href="" coords="418,120,15" shape="circle"
+          onclick="getAnimal(event)" tabindex="0" />
+        <area id="turtle" alt="sea-turtle" title="sea_turtle" href="" coords="421,120,15" shape="circle"
+          onclick="getAnimal(event)" tabindex="1" />
+        <area id="penguin" alt="penguin" title="penguin" href="" coords="634,183,15" shape="circle"
+          onclick="getAnimal(event)" tabindex="2" />
+        <area id="lemur" alt="lemur" title="lemur" href="" coords="456,394,23" shape="circle" onclick="getAnimal(event)"
+          tabindex="3" />
+        <area alt="animal1" title="animal1" href="" coords="456,395,17" shape="circle" tabindex="4" />
+        <!-- seal done -->
+        <area id="seal" alt="seal" title="seal" href="" coords="246,136,14" shape="circle" onclick="getAnimal(event)"
+          tabindex="5" />
+
+        <!-- done oxen -->
+        <area id="oxen" alt="muskoxen" title="muskoxen" href="" coords="128,373,15" shape="circle"
+          onclick="getAnimal(event)" tabindex="6" />
+        <!-- fox done -->
+        <area id="fox" alt="artic-fox" title="fox" href="" coords="68,258,16" shape="circle" onclick="getAnimal(event)"
+          tabindex="7" />
+        <!-- polar bear done -->
+        <area id="polar_bear" alt="polar-bear" title="polar_bear" href="" coords="122,246,15" shape="circle"
+          onclick="getAnimal(event)" tabindex="8" />
+        <!-- done sealion-->
+        <area id="sea_lion" alt="sea-lion" title="sea_lion" href="" coords="270,124,15" shape="circle"
+          onclick="getAnimal(event)" tabindex="9" />
+        <!-- otter done -->
+        <area id="otter" alt="otter" title="otter" href="" coords="270,225,15" shape="circle" onclick="getAnimal(event)"
+          tabindex="10" />
+        <!-- done walrus -->
+        <area id="walrus" alt="walrus" title="walrus" href="" coords="348,186,16" shape="circle"
+          onclick="getAnimal(event)" tabindex="11" />
+        <!-- puffins done -->
+        <area id="puffins" alt="puffins" title="puffins" href="" coords="324,218,16" shape="circle"
+          onclick="getAnimal(event)" tabindex="12" />
+        <!-- wolf done -->
+        <area id="wolf" alt="red-wolf" title="red_wolf" href="" coords="300,294,16" shape="circle"
+          onclick="getAnimal(event)" tabindex="13" />
+
+        <!-- budgie done -->
+        <area id="budgie" alt="budgie-buddies" title="budgie_buddies" href="" coords="801,249,15" shape="circle"
+          onclick="getAnimal(event)" tabindex="14" />
+        <!-- shark2 done -->
+        <area id="shark2" alt="shark" title="shark" href="" coords="808,289,15" shape="circle"
+          onclick="getAnimal(event)" tabindex="15" />
+        <!-- ant-eater done -->
+        <area id="ant_eater" alt="ant-eater" title="ant_eater" href="" coords="952,156,16" shape="circle"
+          onclick="getAnimal(event)" tabindex="16" />
+        <!-- monkey done -->
+        <area id="monkey" alt="monkey" title="monkey" href="" coords="950,226,15" shape="circle"
+          onclick="getAnimal(event)" tabindex="17" />
+        <!-- leopard done -->
+        <area id="leopard" alt="clouded-leopard" title="clouded_leopard" href="" coords="910,297,15" shape="circle"
+          onclick="getAnimal(event)" tabindex="18" />
+        <!-- elephant done -->
+        <area id="elephant" alt="asian-elephant" title="asian_elephant" href="" coords="1010,337,15" shape="circle"
+          onclick="getAnimal(event)" tabindex="19" />
+        <!-- tiger done -->
+        <area id="tiger" alt="tiger" title="tiger" href="" coords="1082,208,15" shape="circle"
+          onclick="getAnimal(event)" tabindex="20" />
+        <!-- has right cordinates but selected by border only for some reason
 even though everything is the same as the ones that work properly-->
-          <area
-            id="meerkat"
-            alt="meerkat"
-            title="meerkat"
-            href=""
-            coords="540,419,17"
-            shape="circle"
-          />
+        <area id="meerkat" alt="meerkat" title="meerkat" href="" coords="540,419,17" shape="circle"
+          onclick="getAnimal(event)" tabindex="21" />
 
+<<<<<<< HEAD
           <!-- wallabies done -->
           <area
             id="wallabies"
@@ -337,12 +201,74 @@ even though everything is the same as the ones that work properly-->
               <div id="feed" class="button">Feed</div>
               <div id="next" class="button">Next</div>
             </div>
+=======
+        <!-- wallabies done -->
+        <area id="wallabies" alt="wallabies" title="wallabies" href="" coords="412,496,15" shape="circle"
+          onclick="getAnimal(event)" tabindex="22" />
+        <!-- goat done -->
+        <area id="goat" alt="goat" title="goat" href="" coords="302,429,15" shape="circle" onclick="getAnimal(event)"
+          tabindex="23" />
+      </map>
+    </div>
+    <!-- side image ............. -->
+    <div>
+      <img src="assets/images/elephantColor.jpg" class="side-img-left" />
+    </div>
+    <!-- animal card start -->
+    <div class="card_wrapper">
+      <div class="card_container">
+        <div class="card container">
+          <div class="card_title padding10">
+            <h1 id="animal_name">Animal title</h1>
+            <div class="close_btn" tabindex="29">X</div>
+          </div>
+          <div class="card_images padding10">
+            <div class="AnimalImg padding10"></div>
+          </div>
+          <div class="card_descriptions padding10">
+            <p id="animal_description">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam
+              nobis facere perspiciatis necessitatibus neque omnis?Lorem ipsum
+              dolor sit amet consectetur adipisicing elit. Dolor, perspiciatis
+              provident? Unde cupiditate et ex, quo voluptatum ipsum, soluta
+              ipsam deserunt cumque ipsa illum. Adipisci esse nemo ipsum.
+              Eius, ratione.
+            </p>
+          </div>
+          <div class="card_buttons padding10">
+            <div id="prev" class="button" tabindex="24">Prev</div>
+            <div id="video" class="button" tabindex="25">Video</div>
+            <div id="learn_more" class="button" tabindex="26">Learn More</div>
+            <div id="feed" class="button" tabindex="27">Feed</div>
+            <div id="next" class="button" tabindex="28">Next</div>
+>>>>>>> 9a76ff3a5db520d20e853570ea400b9ceffaed8a
           </div>
         </div>
       </div>
-      <!-- animal card end -->
     </div>
+    <!-- animal card end -->
+  </div>
 
+  <!-- temporary log in form -->
+  <div id="membership-popUp">
+    <form id="signUpFormHidden">
+      <h1>Membership</h1>
+      <p>
+        Create a membership account to feed the animals and collect fun animal
+        badges.
+      </p>
+      <label for="name"><b></b></label>
+      <input type="text" placeholder="Enter Name" name="name" required />
+      <label for="psw"><b></b></label>
+      <input type="password" placeholder="Enter Password" name="psw" required />
+      <button type="submit" class="btn">Sign Up</button>
+      <p>Already a member? <a href="#">Login</a></p>
+      <button type="submit" class="btn cancel" onclick="closeForm()">
+        Close
+      </button>
+    </form>
+
+<<<<<<< HEAD
     <!-- videos start -->
     <div id="video_container">
       <h1>Videos</h1>
@@ -425,49 +351,71 @@ even though everything is the same as the ones that work properly-->
           Close
         </button>
       </form>
+=======
+    <form id="signUpFormActive" active>
+      <h1>Membership</h1>
+      <p>
+        Create a membership account to feed the animals and collect fun animal
+        badges.
+      </p>
+      <label for="name"><b></b></label>
+      <input type="text" placeholder="Enter Name" name="name" required />
+      <label for="psw"><b></b></label>
+      <input type="password" placeholder="Enter Password" name="psw" required />
+      <button type="submit" class="btn">Sign Up</button>
+      <p>Already a member? <a href="#login">Login</a></p>
+      <button type="submit" class="btn cancel" onclick="closeForm()">
+        Close
+      </button>
+    </form>
+>>>>>>> 9a76ff3a5db520d20e853570ea400b9ceffaed8a
 
-      <form id="signUpFormActive" active>
-        <h1>Membership</h1>
-        <p>
-          Create a membership account to feed the animals and collect fun animal
-          badges.
-        </p>
-        <label for="name"><b></b></label>
-        <input type="text" placeholder="Enter Name" name="name" required />
-        <label for="psw"><b></b></label>
-        <input
-          type="password"
-          placeholder="Enter Password"
-          name="psw"
-          required
-        />
-        <button type="submit" class="btn">Sign Up</button>
-        <p>Already a member? <a href="#login">Login</a></p>
-        <button type="submit" class="btn cancel" onclick="closeForm()">
-          Close
-        </button>
-      </form>
+    <form id="login">
+      <h1>Member</h1>
+      <label for="name"><b></b></label>
+      <input type="text" placeholder="Enter Name" name="name" required />
+      <label for="psw"><b></b></label>
+      <input type="password" placeholder="Enter Password" name="psw" required />
+      <button type="submit" class="btn">Login</button>
+      <p>Not a member yet? <a href="#signUpFormActive">Sign Up</a></p>
+      <button type="submit" class="btn cancel" onclick="closeForm()">
+        Close
+      </button>
+    </form>
+  </div>
 
-      <form id="login">
-        <h1>Member</h1>
-        <label for="name"><b></b></label>
-        <input type="text" placeholder="Enter Name" name="name" required />
-        <label for="psw"><b></b></label>
-        <input
-          type="password"
-          placeholder="Enter Password"
-          name="psw"
-          required
-        />
-        <button type="submit" class="btn">Login</button>
-        <p>Not a member yet? <a href="#signUpFormActive">Sign Up</a></p>
-        <button type="submit" class="btn cancel" onclick="closeForm()">
-          Close
-        </button>
-      </form>
+  <!-- login&registration -->
+  <div id="login_container">
+    <div id="outter_login_container">
+      <div id="login_in_container">
+        <!-- <div class="close_loginForm">X</div> -->
+        <form id="sign_in_form" action="#">
+          <h1>Become Member</h1>
+
+          <div class="social_container">
+            <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+            <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+          <span>or use your account</span>
+          <input type="text" placeholder="Name" />
+          <input type="email" placeholder="Email" />
+          <input type="password" placeholder="Password" />
+          <a href="#">Forgot your password?</a>
+          <button>Sign In</button>
+        </form>
+      </div>
     </div>
+    <!-- login&registration end-->
+    <footer>
+      <p>
+        Created with <i class="fa fa-heart"></i> by
+        <a target="_blank" href="#">Team 1 - Dustin, Aliona, Jason.</a>
+      </p>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./js/main.js"></script>
     <script src="./js/scripts.js"></script>
-  </body>
+</body>
+
 </html>
