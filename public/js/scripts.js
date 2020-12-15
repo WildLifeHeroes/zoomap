@@ -41,14 +41,14 @@ function clickOrPress(e) {
       getNext();
       break;
     case feed:
-      displayBadges(e);
+      displayBadges();
       break;
     default:
       break;
   }
 }
 
-function displayBadges(e) {
+function displayBadges() {
   clearImg();
   const url = host + "/badges/" + user;
   axios.get(url)
@@ -59,14 +59,18 @@ function displayBadges(e) {
 }
 
 function createBadges(data) {
+  let tabIndex = 100;
+  const container = document.getElementsByClassName('badge-container')[0];
+  container.innerHTML = "";
   for (let animal in data.images) {
+    tabIndex++;
     const badge = document.createElement('div');
     badge.classList.add("badge");
     const title = document.createElement('div');
     title.innerHTML = animal;
-    title.classList.add("title");
+    title.classList.add("badge-title");
     const frame = document.createElement('div');
-    frame.classList.add("frame")
+    frame.classList.add("frame");
     frame.classList.add(animal);
     const imgContainer = document.createElement('div');
     imgContainer.classList.add("img-container");
@@ -78,15 +82,22 @@ function createBadges(data) {
     badgeBtnCont.classList.add("badge-btn-container");
     const oneDollar = document.createElement('button');
     oneDollar.setAttribute('type', "submit");
-    oneDollar.classList.add("donate-btn", "one-dollar");
+    oneDollar.setAttribute('tabIndex', tabIndex);
+    oneDollar.classList.add("donate-btn");
+    oneDollar.classList.add("one-dollar");
+    oneDollar.classList.add(animal);
     const fiveDollar = document.createElement('button');
     fiveDollar.setAttribute('type', "submit");
-    fiveDollar.classList.add("donate-btn", "five-dollar");
+    fiveDollar.setAttribute('tabIndex', ++tabIndex);
+    fiveDollar.classList.add("donate-btn");
+    fiveDollar.classList.add("five-dollar");
+    fiveDollar.classList.add(animal);
     const tenDollar = document.createElement('button');
     tenDollar.setAttribute('type', "submit");
-    tenDollar.classList.add("donate-btn", "ten-dollar");
-
-    const container = document.getElementsByClassName('badge-container')[0];
+    tenDollar.setAttribute('tabIndex', ++tabIndex);
+    tenDollar.classList.add("donate-btn");
+    tenDollar.classList.add("ten-dollar");
+    tenDollar.classList.add(animal);
 
     badge.appendChild(title);
     badge.appendChild(frame);
@@ -97,8 +108,19 @@ function createBadges(data) {
     badgeBtnCont.appendChild(fiveDollar);
     badgeBtnCont.appendChild(tenDollar);
     container.appendChild(badge);
+
+    oneDollar.addEventListener('click', () => donation(1, animal));
+    fiveDollar.addEventListener('click', () => donation(5, animal));
+    tenDollar.addEventListener('click', () => donation(10, animal));
   }
   colorizeEarnedBadges(data.badges);
+}
+
+function donation(amount, animal) {
+  const url = `${host}/donate/${user}/${animal}/${amount}`;
+  axios.patch(url)
+    .then(() => displayBadges())
+    .catch((err) => console.log('donation failed: ', err));
 }
 
 function colorizeEarnedBadges(badges) {
@@ -117,6 +139,8 @@ function colorizeEarnedBadges(badges) {
     }
   });
 }
+
+
 
 function getNext() {}
 
