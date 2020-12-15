@@ -1,4 +1,4 @@
-const host = "http://zoomap.herokuapp.com";
+const host = "https://zoomap.herokuapp.com";
 let user = "Dustin"; //TODO: dynamically assign
 
 const cardWrapper = document.querySelector(".card_wrapper");
@@ -279,16 +279,17 @@ function serializeForm(form) {
   postAPI(obj);
 }
 const membership = document.querySelector("#membership");
+
 function postAPI(obj) {
   axios
     .post(`${host}/login`, obj)
     .then((res) => {
       if (res.data.message === undefined) {
         console.log("login success");
-        
+
       } else {
         console.log(res.data.message);
-        
+
       }
       membership.innerHTML = obj["name"];
       loginContainer.style.display = "none";
