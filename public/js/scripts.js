@@ -9,6 +9,7 @@ const outterLoginContainer = document.querySelector("#outter_login_container");
 const prev = document.querySelector("#prev");
 const next = document.querySelector("#next");
 const feed = document.querySelector("#feed");
+const video = document.querySelector("#video");
 const feedWrapper = document.querySelector(".feed-wrapper");
 
 
@@ -16,7 +17,7 @@ const feedWrapper = document.querySelector(".feed-wrapper");
 window.addEventListener("click", (e) => {
   clickOrPress(e);
 
-  if (e.target == feed) {
+  if (e.target == feed || e.target == video) {
     cardWrapper.style.display = "none";
     clearImg();
   }
