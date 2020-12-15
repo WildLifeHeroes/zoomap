@@ -139,3 +139,6 @@ form {
   display: none;
 }
 
+#welcomeMsg {
+  padding: 0 20%;
+}

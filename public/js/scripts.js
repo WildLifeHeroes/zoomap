@@ -15,13 +15,22 @@ const feed = document.querySelector("#feed");
 // used to close animal card if user click area outside of animal card or close button.
 window.addEventListener("click", (e) => {
   clickOrPress(e);
+
+  if (
+    e.target == cardWrapper ||
+    e.target == cardContainer ||
+    e.target == closeCardBtn
+  ) {
+    cardWrapper.style.display = "none";
+    clearImg();
+  }
 });
 
-window.addEventListener('keypress', (e) => {
-  if (e.code = "Enter") {
+window.addEventListener("keypress", (e) => {
+  if ((e.code = "Enter")) {
     clickOrPress(e);
   }
-})
+});
 
 function clickOrPress(e) {
   switch (e.target) {
@@ -51,7 +60,8 @@ function clickOrPress(e) {
 function displayBadges() {
   clearImg();
   const url = host + "/badges/" + user;
-  axios.get(url)
+  axios
+    .get(url)
     .then((res) => {
       createBadges(res.data);
     })
@@ -60,41 +70,41 @@ function displayBadges() {
 
 function createBadges(data) {
   let tabIndex = 100;
-  const container = document.getElementsByClassName('badge-container')[0];
+  const container = document.getElementsByClassName("badge-container")[0];
   container.innerHTML = "";
   for (let animal in data.images) {
     tabIndex++;
-    const badge = document.createElement('div');
+    const badge = document.createElement("div");
     badge.classList.add("badge");
-    const title = document.createElement('div');
+    const title = document.createElement("div");
     title.innerHTML = animal;
     title.classList.add("badge-title");
-    const frame = document.createElement('div');
+    const frame = document.createElement("div");
     frame.classList.add("frame");
     frame.classList.add(animal);
-    const imgContainer = document.createElement('div');
+    const imgContainer = document.createElement("div");
     imgContainer.classList.add("img-container");
-    const badgeImg = document.createElement('img');
-    badgeImg.setAttribute('src', data.images[animal].images);
-    badgeImg.setAttribute('id', animal + 'img');
-    badgeImg.classList.add('badge-img');
-    const badgeBtnCont = document.createElement('div');
+    const badgeImg = document.createElement("img");
+    badgeImg.setAttribute("src", data.images[animal].images);
+    badgeImg.setAttribute("id", animal + "img");
+    badgeImg.classList.add("badge-img");
+    const badgeBtnCont = document.createElement("div");
     badgeBtnCont.classList.add("badge-btn-container");
-    const oneDollar = document.createElement('button');
-    oneDollar.setAttribute('type', "submit");
-    oneDollar.setAttribute('tabIndex', tabIndex);
+    const oneDollar = document.createElement("button");
+    oneDollar.setAttribute("type", "submit");
+    oneDollar.setAttribute("tabIndex", tabIndex);
     oneDollar.classList.add("donate-btn");
     oneDollar.classList.add("one-dollar");
     oneDollar.classList.add(animal);
-    const fiveDollar = document.createElement('button');
-    fiveDollar.setAttribute('type', "submit");
-    fiveDollar.setAttribute('tabIndex', ++tabIndex);
+    const fiveDollar = document.createElement("button");
+    fiveDollar.setAttribute("type", "submit");
+    fiveDollar.setAttribute("tabIndex", ++tabIndex);
     fiveDollar.classList.add("donate-btn");
     fiveDollar.classList.add("five-dollar");
     fiveDollar.classList.add(animal);
-    const tenDollar = document.createElement('button');
-    tenDollar.setAttribute('type', "submit");
-    tenDollar.setAttribute('tabIndex', ++tabIndex);
+    const tenDollar = document.createElement("button");
+    tenDollar.setAttribute("type", "submit");
+    tenDollar.setAttribute("tabIndex", ++tabIndex);
     tenDollar.classList.add("donate-btn");
     tenDollar.classList.add("ten-dollar");
     tenDollar.classList.add(animal);
@@ -109,38 +119,37 @@ function createBadges(data) {
     badgeBtnCont.appendChild(tenDollar);
     container.appendChild(badge);
 
-    oneDollar.addEventListener('click', () => donation(1, animal));
-    fiveDollar.addEventListener('click', () => donation(5, animal));
-    tenDollar.addEventListener('click', () => donation(10, animal));
+    oneDollar.addEventListener("click", () => donation(1, animal));
+    fiveDollar.addEventListener("click", () => donation(5, animal));
+    tenDollar.addEventListener("click", () => donation(10, animal));
   }
   colorizeEarnedBadges(data.badges);
 }
 
 function donation(amount, animal) {
   const url = `${host}/donate/${user}/${animal}/${amount}`;
-  axios.patch(url)
+  axios
+    .patch(url)
     .then(() => displayBadges())
-    .catch((err) => console.log('donation failed: ', err));
+    .catch((err) => console.log("donation failed: ", err));
 }
 
 function colorizeEarnedBadges(badges) {
-  badges.forEach(badge => {
-    const img = document.getElementById(badge.animal + 'img');
+  badges.forEach((badge) => {
+    const img = document.getElementById(badge.animal + "img");
     const frame = document.querySelector(`.frame.${badge.animal}`);
     if (badge.amountDonated > 0) {
-      frame.style.borderColor = '#b08d57';
-      img.style.filter = 'grayscale(0%)';
+      frame.style.borderColor = "#b08d57";
+      img.style.filter = "grayscale(0%)";
     }
     if (badge.amountDonated > 10) {
-      frame.style.borderColor = '#c0c0c0';
+      frame.style.borderColor = "#c0c0c0";
     }
     if (badge.amountDonated > 20) {
-      frame.style.borderColor = '#ffd700';
+      frame.style.borderColor = "#ffd700";
     }
   });
 }
-
-
 
 function getNext() {}
 
@@ -173,7 +182,7 @@ function callingAPI(url, e) {
         animalBack.images.images,
         animalBack.animal.name,
         animalBack.animal.info,
-        e.target.tabIndex,
+        e.target.tabIndex
       );
     })
     .catch(function (error) {
