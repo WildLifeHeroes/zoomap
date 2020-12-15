@@ -198,6 +198,6 @@ form {
 #videos iframe:hover {
   transform: scale(1.2);
 }
-.hr-style {
+hr {
   width: 100%;
 }
