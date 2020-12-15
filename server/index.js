@@ -4,8 +4,6 @@ const path = require('path');
 const cors = require('cors');
 const router = require('./routes');
 
-const morgan = require('morgan'); // dev only
-
 const app = express();
 
 const PORT = process.env.PORT || 3000;
