@@ -1,4 +1,4 @@
-const host = "http://localhost:3000";
+const host = "http://zoomap.herokuapp.com";
 let user = "Dustin"; //TODO: dynamically assign
 
 const cardWrapper = document.querySelector(".card_wrapper");
@@ -100,18 +100,21 @@ function createBadges(data) {
     oneDollar.classList.add("donate-btn");
     oneDollar.classList.add("one-dollar");
     oneDollar.classList.add(animal);
-    const fiveDollar = document.createElement("button");
-    fiveDollar.setAttribute("type", "submit");
-    fiveDollar.setAttribute("tabIndex", ++tabIndex);
+    oneDollar.innerHTML = '$1';
+    const fiveDollar = document.createElement('button');
+    fiveDollar.setAttribute('type', "submit");
+    fiveDollar.setAttribute('tabIndex', ++tabIndex);
     fiveDollar.classList.add("donate-btn");
     fiveDollar.classList.add("five-dollar");
     fiveDollar.classList.add(animal);
-    const tenDollar = document.createElement("button");
-    tenDollar.setAttribute("type", "submit");
-    tenDollar.setAttribute("tabIndex", ++tabIndex);
+    fiveDollar.innerHTML = '$5';
+    const tenDollar = document.createElement('button');
+    tenDollar.setAttribute('type', "submit");
+    tenDollar.setAttribute('tabIndex', ++tabIndex);
     tenDollar.classList.add("donate-btn");
     tenDollar.classList.add("ten-dollar");
     tenDollar.classList.add(animal);
+    tenDollar.innerHTML = '$10';
 
     badge.appendChild(title);
     badge.appendChild(frame);
@@ -278,7 +281,7 @@ function serializeForm(form) {
 const membership = document.querySelector("#membership");
 function postAPI(obj) {
   axios
-    .post("http://localhost:3000/login", obj)
+    .post(`${host}/login`, obj)
     .then((res) => {
       if (res.data.message === undefined) {
         console.log("login success");
@@ -299,6 +302,7 @@ function postAPI(obj) {
  * Animal Videos
  *********************************/
 const animalVids = document.getElementById("video_container");
+
 function videoDisplay(vidArray) {
   const video1 = document.getElementById("vid1");
   const video2 = document.getElementById("vid2");
@@ -328,9 +332,10 @@ function animalRequest() {
   console.dir(animal);
   urlBuilderVids(animal);
 }
+
 function urlBuilderVids(animal) {
   // building the API endpoint URL
-  const baseUrl = "http://localhost:3000/videos/"; //videos
+  const baseUrl = `${host}/videos/`; //videos
   const endPointUrl = `${baseUrl}${animal}`;
   console.log(endPointUrl);
   getVideosApi(endPointUrl);
