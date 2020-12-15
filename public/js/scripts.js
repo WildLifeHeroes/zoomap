@@ -1,4 +1,4 @@
-const host = "http://localhost:3000";
+const host = "http://zoomap.herokuapp.com" || "http: //localhost:3000";
 let user = "Dustin"; //TODO: dynamically assign
 
 
