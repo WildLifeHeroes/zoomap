@@ -1,5 +1,5 @@
 const host = "http://localhost:3000";
-let user = "Dustin"; // dynamically assign
+let user = "Dustin"; //TODO: dynamically assign
 
 /*********************************
  * Animal Card
@@ -55,13 +55,67 @@ function displayBadges(e) {
     .then((res) => {
       createBadges(res.data);
     })
-    .catch((err) => res.status(500).send(err));
+    .catch((err) => console.log(err));
 }
 
 function createBadges(data) {
-  for (let animal of data.images) {
+  for (let animal in data.images) {
+    const badge = document.createElement('div');
+    badge.classList.add("badge");
+    const title = document.createElement('div');
+    title.innerHTML = animal;
+    title.classList.add("title");
+    const frame = document.createElement('div');
+    frame.classList.add("frame")
+    frame.classList.add(animal);
+    const imgContainer = document.createElement('div');
+    imgContainer.classList.add("img-container");
+    const badgeImg = document.createElement('img');
+    badgeImg.setAttribute('src', data.images[animal].images);
+    badgeImg.setAttribute('id', animal);
+    badgeImg.classList.add('badge-img');
+    const badgeBtnCont = document.createElement('div');
+    badgeBtnCont.classList.add("badge-btn-container");
+    const oneDollar = document.createElement('button');
+    oneDollar.setAttribute('type', "submit");
+    oneDollar.classList.add("donate-btn", "one-dollar");
+    const fiveDollar = document.createElement('button');
+    fiveDollar.setAttribute('type', "submit");
+    fiveDollar.classList.add("donate-btn", "five-dollar");
+    const tenDollar = document.createElement('button');
+    tenDollar.setAttribute('type', "submit");
+    tenDollar.classList.add("donate-btn", "ten-dollar");
 
+    const container = document.getElementsByClassName('badge-container')[0];
+
+    badge.appendChild(title);
+    badge.appendChild(frame);
+    badge.appendChild(badgeBtnCont);
+    frame.appendChild(imgContainer);
+    imgContainer.appendChild(badgeImg);
+    badgeBtnCont.appendChild(oneDollar);
+    badgeBtnCont.appendChild(fiveDollar);
+    badgeBtnCont.appendChild(tenDollar);
+    container.appendChild(badge);
   }
+  colorizeEarnedBadges(data.badges);
+}
+
+function colorizeEarnedBadges(badges) {
+  badges.forEach(badge => {
+    const img = document.getElementById(badge.animal);
+    const frame = document.querySelector(`.frame.${badge.animal}`);
+    if (badge.amountDonated > 0) {
+      frame.style.borderColor = '#b08d57';
+      img.style.filter = "";
+    }
+    if (badge.amountDonated > 10) {
+      frame.style.borderColor = '#c0c0c0';
+    }
+    if (badge.amountDonated > 20) {
+      frame.style.borderColor = '#ffd700';
+    }
+  });
 }
 
 function getNext() {}
@@ -79,7 +133,7 @@ function urlBuilder(title, e) {
   const baseUrl = host + "/info/";
   const queryTerm = title;
   const endPointUrl = `${baseUrl}${queryTerm}`;
-  callingAPI(endPointUrl);
+  callingAPI(endPointUrl, e);
 }
 
 function callingAPI(url, e) {
