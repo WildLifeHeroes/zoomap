@@ -1,70 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
-      integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="styles/card.css" />
-    <link rel="stylesheet" href="styles/main.css" />
-    <link rel="stylesheet" href="styles/styles.css" />
-    <link rel="stylesheet" href="styles/membership.css" />
-    <title>zoomap interactive</title>
-  </head>
-  <body>
-    <!-- main page -->
-    <!-- navigation bar and it's content -->
-    <nav class="nav">
-      <a href="https://www.pdza.org/" target="_blank" class="logo">
-        <img
-          src="https://pbs.twimg.com/profile_images/1075148407084216320/m2P5DN19_400x400.jpg"
-          class="logo"
-        />
-      </a>
-      <a href="#map-img"
-        ><h1 class="title">Virtual Point Defiance Zoo and Aquarium</h1></a
-      >
 
-      <ul>
-        <li>
-          <a class="nav-link" href="/">Welcome</a>
-        </li>
-        <li>
-          <!-- this link will guide user to membership page by its given id# -->
-          <a
-            id="membership"
-            class="nav-link active"
-            href="#membership-popUp"
-            onclick="loginFunc()"
-            ;
-            >Membership</a
-          >
-        </li>
-      </ul>
-    </nav>
-    <h1>Welcome and enjoy your journey through the zoo</h1>
-    <p id="welcomeMsg">
-      explore the map to discover various animals from point defiance zoo. Lorem
-      ipsum, dolor sit amet consectetur adipisicing elit. Fugiat, deserunt.
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptates
-      perspiciatis quisquam ipsam numquam aliquam doloremque ad incidunt laborum
-      soluta nemo!
-    </p>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+    crossorigin="anonymous" />
+  <link rel="stylesheet" href="styles/card.css" />
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/styles.css" />
+  <link rel="stylesheet" href="styles/membership.css" />
+  <title>zoomap interactive</title>
+</head>
+
+<body>
+  <!-- main page -->
+  <!-- navigation bar and it's content -->
+  <nav class="nav">
+    <a href="https://www.pdza.org/" target="_blank" class="logo">
+      <img src="https://pbs.twimg.com/profile_images/1075148407084216320/m2P5DN19_400x400.jpg" class="logo" />
+    </a>
+    <a href="#map-img">
+      <h1 class="title">Virtual Point Defiance Zoo and Aquarium</h1>
+    </a>
+
     <ul>
       <li>
         <a class="nav-link" href="/">Welcome</a>
       </li>
       <li>
         <!-- this link will guide user to membership page by its given id# -->
-        <a class="nav-link active" href="#membership-popUp" onclick="loginFunc()" ;>Membership</a>
+        <a id="membership" class="nav-link active" href="#membership-popUp" onclick="loginFunc()" ;>Membership</a>
       </li>
     </ul>
   </nav>
-
   <h1>Welcome and enjoy your journey through the zoo</h1>
   <p id="welcomeMsg">
     explore the map to discover various animals from point defiance zoo. Lorem
@@ -73,7 +43,6 @@
     perspiciatis quisquam ipsam numquam aliquam doloremque ad incidunt laborum
     soluta nemo!
   </p>
-
   <!-- main image containter for main page -->
   <div class="img-container">
     <!-- side image ............. -->
@@ -200,9 +169,7 @@ even though everything is the same as the ones that work properly-->
             <h1>Become Member</h1>
             <div class="social_container">
               <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-              <a href="#" class="social"
-                ><i class="fab fa-google-plus-g"></i
-              ></a>
+              <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
               <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
             </div>
             <span>or use your account</span>
@@ -221,26 +188,27 @@ even though everything is the same as the ones that work properly-->
     <div class="badge-container"></div>
     <!-- badges end-->
 
-  <!-- videos start -->
-  <div id="video_container">
-    <h1>Videos</h1>
-    <hr />
-    <div class="videos">
-      <iframe class="vid-style" id="vid1" width="560" height="315" src="https://www.youtube.com/embed/videoId/"
-        frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe>
-      <iframe id="vid2" class="vid-style" width="560" height="315" src="https://www.youtube.com/embed/videoId/"
-        frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe>
-      <iframe id="vid3" class="vid-style" width="560" height="315" src="https://www.youtube.com/embed/videoId/"
-        frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe>
-      <iframe id="vid4" class="vid-style" width="560" height="315" src="https://www.youtube.com/embed/videoId/"
-        frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe>
-      <iframe id="vid5" class="vid-style" width="560" height="315" src="https://www.youtube.com/embed/videoId/"
-        frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe>
+    <!-- videos start -->
+    <div id="video_container">
+      <h1>Videos</h1>
+      <hr />
+      <div class="videos">
+        <iframe class="vid-style" id="vid1" width="560" height="315" src="https://www.youtube.com/embed/videoId/"
+          frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+        <iframe id="vid2" class="vid-style" width="560" height="315" src="https://www.youtube.com/embed/videoId/"
+          frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+        <iframe id="vid3" class="vid-style" width="560" height="315" src="https://www.youtube.com/embed/videoId/"
+          frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+        <iframe id="vid4" class="vid-style" width="560" height="315" src="https://www.youtube.com/embed/videoId/"
+          frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+        <iframe id="vid5" class="vid-style" width="560" height="315" src="https://www.youtube.com/embed/videoId/"
+          frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
     </div>
     <!-- videos end -->
     <footer>
@@ -252,6 +220,6 @@ even though everything is the same as the ones that work properly-->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./js/main.js"></script>
     <script src="./js/scripts.js"></script>
-  </body>
-</html>
+</body>
 
+</html>
