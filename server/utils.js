@@ -67,7 +67,7 @@ async function getApiImages(name) {
     })
     .catch((error) => {
       const defaultResponse = {
-        image: "public/assets/images/brian-mcgowan-weY3ecoNSZw-unsplash.jpg",
+        image: "assets/images/brian-mcgowan-weY3ecoNSZw-unsplash.jpg",
         default: true,
       };
       return defaultResponse;
