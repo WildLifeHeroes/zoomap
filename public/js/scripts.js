@@ -1,7 +1,6 @@
 const host = "http://localhost:3000";
 let user = "Dustin"; //TODO: dynamically assign
 
-
 const cardWrapper = document.querySelector(".card_wrapper");
 const cardContainer = document.querySelector(".card_container");
 const closeCardBtn = document.querySelector(".close_btn");
@@ -11,7 +10,6 @@ const next = document.querySelector("#next");
 const feed = document.querySelector("#feed");
 const video = document.querySelector("#video");
 const feedWrapper = document.querySelector(".feed-wrapper");
-
 
 // used to close animal card if user click area outside of animal card or close button.
 window.addEventListener("click", (e) => {
@@ -25,7 +23,7 @@ window.addEventListener("click", (e) => {
   if (
     e.target == cardWrapper ||
     e.target == cardContainer ||
-    e.target == closeCardBtn 
+    e.target == closeCardBtn
   ) {
     cardWrapper.style.display = "none";
     clearImg();
@@ -162,7 +160,7 @@ function getNext() {}
 function getPrev() {}
 
 /*********************************
- * Animal Card 
+ * Animal Card
  *********************************/
 
 function getAnimal(e) {
@@ -253,7 +251,6 @@ function getCard_Wrapper() {
   return card_wrapper;
 }
 
-
 /*********************************
  * Login and register
  *********************************/
@@ -274,18 +271,24 @@ function serializeForm(form) {
   let obj = {};
   let formData = new FormData(form);
   for (let key of formData.keys()) {
-    //obj[`"${key}"`] = formData.get(key);
     obj[key] = formData.get(key);
   }
-  console.log(obj);
   postAPI(obj);
 }
-
+const membership = document.querySelector("#membership");
 function postAPI(obj) {
   axios
     .post("http://localhost:3000/login", obj)
     .then((res) => {
-      console.log(res);
+      if (res.data.message === undefined) {
+        console.log("login success");
+        
+      } else {
+        console.log(res.data.message);
+        
+      }
+      membership.innerHTML = obj["name"];
+      loginContainer.style.display = "none";
     })
     .catch((error) => {
       console.log(error);
