@@ -19,7 +19,8 @@ window.addEventListener("click", (e) => {
   if (
     e.target == cardWrapper ||
     e.target == cardContainer ||
-    e.target == closeCardBtn
+    e.target == closeCardBtn ||
+    e.target == feed
   ) {
     cardWrapper.style.display = "none";
     clearImg();
