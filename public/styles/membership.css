@@ -18,7 +18,7 @@ a {
   margin: 15px 0;
 }
 
-button {
+#singInBtn {
   border-radius: 20px;
   border: 1px solid #ff4b2b;
   background-color: #ff4b2b;
@@ -31,15 +31,15 @@ button {
   transition: transform 80ms ease-in;
 }
 
-button:active {
+#singInBtn:active {
   transform: scale(0.95);
 }
 
-button:focus {
+#singInBtn:focus {
   outline: none;
 }
 
-button.ghost {
+#singInBtn.ghost {
   background-color: transparent;
   border-color: #ffffff;
 }
@@ -64,18 +64,6 @@ input {
   width: 100%;
 }
 
-footer {
-  background-color: #222;
-  color: #fff;
-  font-size: 14px;
-  bottom: 0;
-  position: fixed;
-  left: 0;
-  right: 0;
-  text-align: center;
-  z-index: 999;
-}
-
 #login_container {
     display: none;
     position: fixed;
@@ -86,14 +74,6 @@ footer {
     padding-top: 15%;
     background: rgba(0, 0, 0, 0.5);
 }
-
-.close_loginForm {
-    position: relative;
-    
-  }
-  .close_loginForm:hover {
-    color: red;
-  }
 
 .social_container {
   margin: 20px 0;
@@ -108,6 +88,18 @@ footer {
   margin: 0 5px;
   height: 40px;
   width: 40px;
+}
+
+footer {
+  background-color: #222;
+  color: #fff;
+  font-size: 14px;
+  bottom: 0;
+  position: fixed;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 999;
 }
 
 footer p {
