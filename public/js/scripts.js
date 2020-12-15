@@ -1,7 +1,6 @@
 const host = "http://localhost:3000";
 let user = "Dustin"; //TODO: dynamically assign
 
-
 const cardWrapper = document.querySelector(".card_wrapper");
 const cardContainer = document.querySelector(".card_container");
 const closeCardBtn = document.querySelector(".close_btn");
@@ -10,7 +9,6 @@ const prev = document.querySelector("#prev");
 const next = document.querySelector("#next");
 const feed = document.querySelector("#feed");
 const feedWrapper = document.querySelector(".feed-wrapper");
-
 
 // used to close animal card if user click area outside of animal card or close button.
 window.addEventListener("click", (e) => {
@@ -24,7 +22,7 @@ window.addEventListener("click", (e) => {
   if (
     e.target == cardWrapper ||
     e.target == cardContainer ||
-    e.target == closeCardBtn 
+    e.target == closeCardBtn
   ) {
     cardWrapper.style.display = "none";
     clearImg();
@@ -161,7 +159,7 @@ function getNext() {}
 function getPrev() {}
 
 /*********************************
- * Animal Card 
+ * Animal Card
  *********************************/
 
 function getAnimal(e) {
@@ -251,7 +249,6 @@ function getCard_Wrapper() {
   const card_wrapper = document.querySelector(".card_wrapper");
   return card_wrapper;
 }
-
 
 /*********************************
  * Login and register
@@ -349,3 +346,14 @@ function getVideosApi(urlPath) {
       console.log(error);
     });
 }
+
+closeButton = document.getElementById("close-Btn");
+closeButton.addEventListener("click", closeBtn);
+
+function closeBtn() {
+  console.log("close btn");
+  animalVids.style.display = "none";
+}
+/*********************************
+ * Animal Videos end
+ *********************************/
