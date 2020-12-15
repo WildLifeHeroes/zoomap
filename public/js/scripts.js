@@ -251,7 +251,7 @@ function getCard_Wrapper() {
   const card_wrapper = document.querySelector(".card_wrapper");
   return card_wrapper;
 }
-
+/* Animal Card End */
 
 /*********************************
  * Login and register
@@ -294,6 +294,7 @@ function postAPI(obj) {
 /*********************************
  * Animal Videos
  *********************************/
+
 const animalVids = document.getElementById("video_container");
 function videoDisplay(vidArray) {
   const video1 = document.getElementById("vid1");
@@ -347,5 +348,17 @@ function getVideosApi(urlPath) {
     .catch(function (error) {
       // handle error
       console.log(error);
-    });
+    })
 }
+
+closeButton = document.getElementById("close-Btn");
+closeButton.addEventListener("click", closeBtn);
+
+function closeBtn() {
+  console.log("close btn");
+  animalVids.style.display = "none";
+}
+/*********************************
+ * Animal Videos end
+ *********************************/
+
