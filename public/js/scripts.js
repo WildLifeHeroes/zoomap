@@ -24,7 +24,7 @@ window.addEventListener("click", (e) => {
   if (
     e.target == cardWrapper ||
     e.target == cardContainer ||
-    e.target == closeCardBtn 
+    e.target == closeCardBtn
   ) {
     cardWrapper.style.display = "none";
     clearImg();
@@ -101,18 +101,21 @@ function createBadges(data) {
     oneDollar.classList.add("donate-btn");
     oneDollar.classList.add("one-dollar");
     oneDollar.classList.add(animal);
-    const fiveDollar = document.createElement("button");
-    fiveDollar.setAttribute("type", "submit");
-    fiveDollar.setAttribute("tabIndex", ++tabIndex);
+    oneDollar.innerHTML = '$1';
+    const fiveDollar = document.createElement('button');
+    fiveDollar.setAttribute('type', "submit");
+    fiveDollar.setAttribute('tabIndex', ++tabIndex);
     fiveDollar.classList.add("donate-btn");
     fiveDollar.classList.add("five-dollar");
     fiveDollar.classList.add(animal);
-    const tenDollar = document.createElement("button");
-    tenDollar.setAttribute("type", "submit");
-    tenDollar.setAttribute("tabIndex", ++tabIndex);
+    fiveDollar.innerHTML = '$5';
+    const tenDollar = document.createElement('button');
+    tenDollar.setAttribute('type', "submit");
+    tenDollar.setAttribute('tabIndex', ++tabIndex);
     tenDollar.classList.add("donate-btn");
     tenDollar.classList.add("ten-dollar");
     tenDollar.classList.add(animal);
+    tenDollar.innerHTML = '$10';
 
     badge.appendChild(title);
     badge.appendChild(frame);
@@ -161,7 +164,7 @@ function getNext() {}
 function getPrev() {}
 
 /*********************************
- * Animal Card 
+ * Animal Card
  *********************************/
 
 function getAnimal(e) {
@@ -295,6 +298,7 @@ function postAPI(obj) {
  * Animal Videos
  *********************************/
 const animalVids = document.getElementById("video_container");
+
 function videoDisplay(vidArray) {
   const video1 = document.getElementById("vid1");
   const video2 = document.getElementById("vid2");
@@ -324,6 +328,7 @@ function animalRequest() {
   console.dir(animal);
   urlBuilderVids(animal);
 }
+
 function urlBuilderVids(animal) {
   // building the API endpoint URL
   const baseUrl = "http://localhost:3000/videos/"; //videos
