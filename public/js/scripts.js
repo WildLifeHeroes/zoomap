@@ -72,7 +72,7 @@ function createBadges(data) {
     imgContainer.classList.add("img-container");
     const badgeImg = document.createElement('img');
     badgeImg.setAttribute('src', data.images[animal].images);
-    badgeImg.setAttribute('id', animal);
+    badgeImg.setAttribute('id', animal + 'img');
     badgeImg.classList.add('badge-img');
     const badgeBtnCont = document.createElement('div');
     badgeBtnCont.classList.add("badge-btn-container");
@@ -103,11 +103,11 @@ function createBadges(data) {
 
 function colorizeEarnedBadges(badges) {
   badges.forEach(badge => {
-    const img = document.getElementById(badge.animal);
+    const img = document.getElementById(badge.animal + 'img');
     const frame = document.querySelector(`.frame.${badge.animal}`);
     if (badge.amountDonated > 0) {
       frame.style.borderColor = '#b08d57';
-      img.style.filter = "";
+      img.style.filter = 'grayscale(0%)';
     }
     if (badge.amountDonated > 10) {
       frame.style.borderColor = '#c0c0c0';
