@@ -1,4 +1,4 @@
-const host = "http://zoomap.herokuapp.com" || "http: //localhost:3000";
+const host = "http://zoomap.herokuapp.com";
 let user = "Dustin"; //TODO: dynamically assign
 
 
@@ -285,7 +285,7 @@ function serializeForm(form) {
 
 function postAPI(obj) {
   axios
-    .post("http://localhost:3000/login", obj)
+    .post(`${host}/login`, obj)
     .then((res) => {
       console.log(res);
     })
@@ -331,7 +331,7 @@ function animalRequest() {
 
 function urlBuilderVids(animal) {
   // building the API endpoint URL
-  const baseUrl = "http://localhost:3000/videos/"; //videos
+  const baseUrl = `${host}/videos/`; //videos
   const endPointUrl = `${baseUrl}${animal}`;
   console.log(endPointUrl);
   getVideosApi(endPointUrl);
