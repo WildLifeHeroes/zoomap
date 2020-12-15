@@ -4,7 +4,6 @@
 const cardWrapper = document.querySelector(".card_wrapper");
 const cardContainer = document.querySelector(".card_container");
 const closeCardBtn = document.querySelector(".close_btn");
-
 const outterLoginContainer = document.querySelector("#outter_login_container");
 
 /*********************************
@@ -47,7 +46,6 @@ function serializeForm(form) {
   let obj = {};
   let formData = new FormData(form);
   for (let key of formData.keys()) {
-    //obj[`"${key}"`] = formData.get(key);
     obj[key] = formData.get(key);
   }
   console.log(obj);
@@ -65,13 +63,9 @@ function postAPI(obj) {
     });
 }
 
-/*********************************
- * Login and register end
- *********************************/
 
-/*********************************
- * util listener end
- *********************************/
+
+
 
 function getAnimal(e) {
   e.preventDefault(); // prevent default behaviors
@@ -127,18 +121,14 @@ function setCard(img, name, info) {
   popCard(target);
 }
 
-// card setter.
+// animal card setter.
 function setCard_Images(img) {
-  // let im = document.querySelector(".AnimalImg");
-  // let u = `"${img}"`;
-  // im.style.background = `url(${u})`;
   if (img !== null) {
     let imgContainer = document.querySelector(".AnimalImg");
     let theImg = document.createElement("img");
+    imgContainer.style.background = "none";
     theImg.setAttribute("id", "animal_thumnail");
     theImg.src = img;
-    // theImg.style.width = "180px";
-    // theImg.style.height = "180px";
     imgContainer.appendChild(theImg);
   }
 }
