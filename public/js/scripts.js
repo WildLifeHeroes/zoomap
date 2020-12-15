@@ -86,18 +86,21 @@ function createBadges(data) {
     oneDollar.classList.add("donate-btn");
     oneDollar.classList.add("one-dollar");
     oneDollar.classList.add(animal);
+    oneDollar.innerHTML = '$1';
     const fiveDollar = document.createElement('button');
     fiveDollar.setAttribute('type', "submit");
     fiveDollar.setAttribute('tabIndex', ++tabIndex);
     fiveDollar.classList.add("donate-btn");
     fiveDollar.classList.add("five-dollar");
     fiveDollar.classList.add(animal);
+    fiveDollar.innerHTML = '$5';
     const tenDollar = document.createElement('button');
     tenDollar.setAttribute('type', "submit");
     tenDollar.setAttribute('tabIndex', ++tabIndex);
     tenDollar.classList.add("donate-btn");
     tenDollar.classList.add("ten-dollar");
     tenDollar.classList.add(animal);
+    tenDollar.innerHTML = '$10';
 
     badge.appendChild(title);
     badge.appendChild(frame);
