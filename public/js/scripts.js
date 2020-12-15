@@ -1,9 +1,7 @@
 const host = "http://localhost:3000";
 let user = "Dustin"; //TODO: dynamically assign
 
-/*********************************
- * Animal Card
- *********************************/
+
 const cardWrapper = document.querySelector(".card_wrapper");
 const cardContainer = document.querySelector(".card_container");
 const closeCardBtn = document.querySelector(".close_btn");
@@ -11,16 +9,22 @@ const outterLoginContainer = document.querySelector("#outter_login_container");
 const prev = document.querySelector("#prev");
 const next = document.querySelector("#next");
 const feed = document.querySelector("#feed");
+const feedWrapper = document.querySelector(".feed-wrapper");
+
 
 // used to close animal card if user click area outside of animal card or close button.
 window.addEventListener("click", (e) => {
   clickOrPress(e);
 
+  if (e.target == feed) {
+    cardWrapper.style.display = "none";
+    clearImg();
+  }
+
   if (
     e.target == cardWrapper ||
     e.target == cardContainer ||
-    e.target == closeCardBtn ||
-    e.target == feed
+    e.target == closeCardBtn 
   ) {
     cardWrapper.style.display = "none";
     clearImg();
@@ -156,6 +160,10 @@ function getNext() {}
 
 function getPrev() {}
 
+/*********************************
+ * Animal Card 
+ *********************************/
+
 function getAnimal(e) {
   e.preventDefault(); // prevent default behaviors
   clearImg();
@@ -243,10 +251,7 @@ function getCard_Wrapper() {
   const card_wrapper = document.querySelector(".card_wrapper");
   return card_wrapper;
 }
-
-/*********************************
- * Animal Card End
- *********************************/
+/* Animal Card End */
 
 /*********************************
  * Login and register
@@ -257,135 +262,39 @@ function loginFunc() {
   loginContainer.style.display = "block";
 }
 
-/*********************************
- * Login and register end
- *********************************/
-
-/*********************************
- * Animal Card
- *********************************/
-const cardWrapper = document.querySelector(".card_wrapper");
-const cardContainer = document.querySelector(".card_container");
-const closeCardBtn = document.querySelector(".close_btn");
-
-function getAnimal(e) {
-  e.preventDefault(); // prevent default behaviors
-  infoRequest(e); // fetch data, build card, pop display the card.
+function doPost(e) {
+  // Prevent form from submitting to the server
+  e.preventDefault();
+  let form = document.querySelector("#sign_in_form");
+  serializeForm(form);
 }
 
-function infoRequest(e) {
-  let animalTitle = e.target.title;
-  console.log(animalTitle);
-  urlBuilder(animalTitle); // get current animal
+function serializeForm(form) {
+  let obj = {};
+  let formData = new FormData(form);
+  for (let key of formData.keys()) {
+    //obj[`"${key}"`] = formData.get(key);
+    obj[key] = formData.get(key);
+  }
+  console.log(obj);
+  postAPI(obj);
 }
 
-function urlBuilder(title) {
-  // building the API endpoint URL
-  const baseUrl = "http://localhost:3000/info/"; //videos
-  const queryTerm = title;
-  const endPointUrl = `${baseUrl}${queryTerm}`;
-  callingAPI(endPointUrl);
-}
-
-function callingAPI(url) {
-  // Make a request for a user with a given ID
+function postAPI(obj) {
   axios
-    .get(url)
-    .then(function (response) {
-      // handle success
-      const animalBack = response.data;
-      console.log(animalBack);
-
-      setCard(
-        // send data to make card relevent to the animal
-        animalBack.images.images,
-        animalBack.animal.name,
-        animalBack.animal.info
-      );
+    .post("http://localhost:3000/login", obj)
+    .then((res) => {
+      console.log(res);
     })
-    .catch(function (error) {
-      // handle error
+    .catch((error) => {
       console.log(error);
     });
 }
 
-//initiate setting animal card.
-function setCard(img, name, info) {
-  const card = makeCard_Wrapper();
-  const classname = "." + `${card.className}`;
-  const target = document.querySelector(classname);
-
-  setCard_Images(img);
-  setCard_Title(name);
-  setCard_descriptions(info);
-
-  popCard(target);
-}
-
-// card setter.
-function setCard_Images(img) {
-  // let im = document.querySelector(".AnimalImg");
-  // let u = `"${img}"`;
-  // im.style.background = `url(${u})`;
-  if (img !== null) {
-    let imgContainer = document.querySelector(".AnimalImg");
-    let theImg = document.createElement("img");
-    theImg.setAttribute("id", "animal_thumnail");
-    theImg.src = img;
-    // theImg.style.width = "180px";
-    // theImg.style.height = "180px";
-    imgContainer.appendChild(theImg);
-  }
-}
-
-function setCard_Title(name) {
-  let n = document.querySelector("#animal_name");
-  n.innerHTML = name;
-}
-
-function setCard_descriptions(info) {
-  let i = document.querySelector("#animal_description");
-  i.innerHTML = info;
-}
-
-// show card upon click event triggered.
-function popCard(card) {
-  card.style.display = "block";
-}
-
-// used to close animal card if user click area outside of animal card or close button.
-window.addEventListener("click", (e) => {
-  if (e.target == cardContainer) {
-    cardWrapper.style.display = "none";
-    clearImg();
-  }
-  if (e.target == closeCardBtn) {
-    cardWrapper.style.display = "none";
-    clearImg();
-  }
-});
-
-function clearImg() {
-  if (document.querySelector("#animal_thumnail") !== null) {
-    let currentImg = document.querySelector("#animal_thumnail");
-    currentImg.remove();
-  }
-}
-
-// parent element generator.
-function makeCard_Wrapper() {
-  const card_wrapper = document.createElement("div");
-  card_wrapper.setAttribute("class", "card_wrapper");
-  return card_wrapper;
-}
-
-/*********************************
- * Animal Card End
- *********************************/
-
 /*********************************
  * Animal Videos
  *********************************/
+
 const animalVids = document.getElementById("video_container");
 function videoDisplay(vidArray) {
   const video1 = document.getElementById("vid1");
@@ -439,7 +348,7 @@ function getVideosApi(urlPath) {
     .catch(function (error) {
       // handle error
       console.log(error);
-    });
+    })
 }
 
 closeButton = document.getElementById("close-Btn");
@@ -452,3 +361,4 @@ function closeBtn() {
 /*********************************
  * Animal Videos end
  *********************************/
+
