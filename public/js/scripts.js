@@ -14,7 +14,7 @@ const badgeWrapper = document.querySelector(".badgeWrapper");
 // used to close animal card if user click area outside of animal card or close button.
 window.addEventListener("click", (e) => {
   clickOrPress(e);
-  
+
   if (e.target == feed || e.target == video) {
     cardWrapper.style.display = "none";
     clearImg();
@@ -294,6 +294,9 @@ function postAPI(obj) {
       }
       membership.innerHTML = obj["name"];
       loginContainer.style.display = "none";
+      if (badgeWrapper.style.display === "block"){
+        badgeWrapper.style.display = "none";
+      }
     })
     .catch((error) => {
       console.log(error);
