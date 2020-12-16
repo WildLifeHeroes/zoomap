@@ -328,7 +328,7 @@ function videoDisplay(vidArray) {
 function getVideos(event) {
   event.preventDefault();
   console.log("video event listener");
-  animalRequest(event);
+  animalRequest();
 }
 
 function animalRequest() {
