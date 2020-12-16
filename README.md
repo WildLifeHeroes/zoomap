@@ -31,7 +31,7 @@ pointDefianceChannel = UCLT8e5UqiAE5EoQi3YDkP8A
 
 - Seed the database with this command:
 ```
-npm seed
+npm run seed
 ```
 
 ### Front end environment
