@@ -359,3 +359,14 @@ function getVideosApi(urlPath) {
       console.log(error);
     });
 }
+
+closeButton = document.getElementById("close-Btn");
+closeButton.addEventListener("click", closeBtn);
+
+function closeBtn() {
+  console.log("close btn");
+  animalVids.style.display = "none";
+}
+/*********************************
+ * Animal Videos end
+ *********************************/
