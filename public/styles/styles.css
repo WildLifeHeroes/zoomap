@@ -156,7 +156,7 @@ form {
   background: rgba(0, 0, 0, 0.8);
   display: block;
   /* use code line below for default to be none */
-  /* display: none; */
+  display: none;
 }
 #videos iframe {
   height: 200px;
