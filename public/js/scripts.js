@@ -242,7 +242,8 @@ function setCard_descriptions(info) {
 
 function setCard_LearnMore(link) {
   let n = document.querySelector('#learn_more');
-  n.onclick = `window.open('${link}','_blank')`;
+  n.setAttribute('onclick', `window.open('${link}','_blank')`);
+  console.log(link);
 }
 
 // show card upon click event triggered.
@@ -302,7 +303,7 @@ function postAPI(obj) {
       }
       membership.innerHTML = obj["name"];
       loginContainer.style.display = "none";
-      if (badgeWrapper.style.display === "block"){
+      if (badgeWrapper.style.display === "block") {
         badgeWrapper.style.display = "none";
       }
     })
