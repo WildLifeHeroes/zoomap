@@ -60,7 +60,7 @@ img {
   top: 20px;
 }
 .close_btn:hover {
-  color: red;
+  color: rgb(146, 6, 6);
 }
 
 .card_images {

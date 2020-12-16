@@ -185,13 +185,17 @@ form {
   bottom: 50px;
   right: 20px;
   padding: 4px 8px;
-  background-color: rgb(71, 72, 73);
-  color: white;
-  border: 2px solid rgb(255, 252, 252);
+  background-color: rgb(204, 225, 244);
+  color: rgb(19, 71, 123);
+  border-radius: 10px;
+  border: 2px solid rgb(4, 49, 92);
+  text-align: center;
 }
 #close-Btn:hover {
   transform: scale(1.1);
-  background-color: rgb(128, 130, 133);
+  /* background-color: rgb(19, 71, 123); */
+  color: rgb(163, 4, 4);
+  border: 2px solid rgb(4, 49, 92);
 }
 
 #videos iframe:hover {
