@@ -243,7 +243,6 @@ function setCard_descriptions(info) {
 function setCard_LearnMore(link) {
   let n = document.querySelector('#learn_more');
   n.setAttribute('onclick', `window.open('${link}','_blank')`);
-  console.log(link);
 }
 
 // show card upon click event triggered.
