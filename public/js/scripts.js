@@ -9,7 +9,7 @@ const prev = document.querySelector("#prev");
 const next = document.querySelector("#next");
 const feed = document.querySelector("#feed");
 const video = document.querySelector("#video");
-const feedWrapper = document.querySelector(".feed-wrapper");
+const badgeWrapper = document.querySelector(".badgeWrapper");
 
 // used to close animal card if user click area outside of animal card or close button.
 window.addEventListener("click", (e) => {
@@ -18,6 +18,7 @@ window.addEventListener("click", (e) => {
   if (e.target == feed || e.target == video) {
     cardWrapper.style.display = "none";
     clearImg();
+    badgeWrapper.style.display = "block";
   }
 
   if (
@@ -301,6 +302,9 @@ function postAPI(obj) {
       }
       membership.innerHTML = obj["name"];
       loginContainer.style.display = "none";
+      if (badgeWrapper.style.display === "block"){
+        badgeWrapper.style.display = "none";
+      }
     })
     .catch((error) => {
       console.log(error);
@@ -332,7 +336,7 @@ function videoDisplay(vidArray) {
 function getVideos(event) {
   event.preventDefault();
   console.log("video event listener");
-  animalRequest(event);
+  animalRequest();
 }
 
 function animalRequest() {
@@ -367,3 +371,14 @@ function getVideosApi(urlPath) {
       console.log(error);
     });
 }
+
+closeButton = document.getElementById("close-Btn");
+closeButton.addEventListener("click", closeBtn);
+
+function closeBtn() {
+  console.log("close btn");
+  animalVids.style.display = "none";
+}
+/*********************************
+ * Animal Videos end
+ *********************************/
