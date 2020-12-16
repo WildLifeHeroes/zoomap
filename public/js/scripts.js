@@ -194,8 +194,10 @@ function callingAPI(url, e) {
         animalBack.images.images,
         animalBack.animal.name,
         animalBack.animal.info,
-        e.target.tabIndex
+        e.target.tabIndex,
+        animalBack.animal.moreInfoUrl
       );
+
     })
     .catch(function (error) {
       // handle error
@@ -204,7 +206,7 @@ function callingAPI(url, e) {
 }
 
 //initiate setting animal card.
-function setCard(img, name, info, tabIndex) {
+function setCard(img, name, info, tabIndex, infoUrl) {
   const card = getCard_Wrapper();
   const classname = "." + `${card.className}`;
   const target = document.querySelector(classname);
@@ -212,6 +214,7 @@ function setCard(img, name, info, tabIndex) {
   setCard_Images(img);
   setCard_Title(name);
   setCard_descriptions(info);
+  setCard_LearnMore(infoUrl);
   popCard(target, tabIndex);
 }
 
@@ -235,6 +238,12 @@ function setCard_Title(name) {
 function setCard_descriptions(info) {
   let i = document.querySelector("#animal_description");
   i.innerHTML = info;
+}
+
+function setCard_LearnMore(link) {
+  let n = document.querySelector('#learn_more');
+  n.setAttribute('onclick', `window.open('${link}','_blank')`);
+  console.log(link);
 }
 
 // show card upon click event triggered.
