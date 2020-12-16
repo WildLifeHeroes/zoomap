@@ -101,21 +101,21 @@ function createBadges(data) {
     oneDollar.classList.add("donate-btn");
     oneDollar.classList.add("one-dollar");
     oneDollar.classList.add(animal);
-    oneDollar.innerHTML = '$1';
-    const fiveDollar = document.createElement('button');
-    fiveDollar.setAttribute('type', "submit");
-    fiveDollar.setAttribute('tabIndex', ++tabIndex);
+    oneDollar.innerHTML = "$1";
+    const fiveDollar = document.createElement("button");
+    fiveDollar.setAttribute("type", "submit");
+    fiveDollar.setAttribute("tabIndex", ++tabIndex);
     fiveDollar.classList.add("donate-btn");
     fiveDollar.classList.add("five-dollar");
     fiveDollar.classList.add(animal);
-    fiveDollar.innerHTML = '$5';
-    const tenDollar = document.createElement('button');
-    tenDollar.setAttribute('type', "submit");
-    tenDollar.setAttribute('tabIndex', ++tabIndex);
+    fiveDollar.innerHTML = "$5";
+    const tenDollar = document.createElement("button");
+    tenDollar.setAttribute("type", "submit");
+    tenDollar.setAttribute("tabIndex", ++tabIndex);
     tenDollar.classList.add("donate-btn");
     tenDollar.classList.add("ten-dollar");
     tenDollar.classList.add(animal);
-    tenDollar.innerHTML = '$10';
+    tenDollar.innerHTML = "$10";
 
     badge.appendChild(title);
     badge.appendChild(frame);
@@ -287,14 +287,12 @@ function postAPI(obj) {
     .then((res) => {
       if (res.data.message === undefined) {
         console.log("login success");
-
       } else {
         console.log(res.data.message);
-
       }
       membership.innerHTML = obj["name"];
       loginContainer.style.display = "none";
-      if (badgeWrapper.style.display === "block"){
+      if (badgeWrapper.style.display === "block") {
         badgeWrapper.style.display = "none";
       }
     })
@@ -314,9 +312,8 @@ function videoDisplay(vidArray) {
   const video3 = document.getElementById("vid3");
   const video4 = document.getElementById("vid4");
   const video5 = document.getElementById("vid5");
-  baseUrl = "https://www.youtube.com/embed/";
+  const baseUrl = "https://www.youtube.com/embed/";
   video1.src = baseUrl + vidArray[0];
-  console.log("video1" + video1.src);
   video2.src = baseUrl + vidArray[1];
   video3.src = baseUrl + vidArray[2];
   video4.src = baseUrl + vidArray[3];
@@ -327,14 +324,12 @@ function videoDisplay(vidArray) {
 //when video button is clicked call request video method.
 function getVideos(event) {
   event.preventDefault();
-  console.log("video event listener");
   animalRequest();
 }
 
 function animalRequest() {
   const n = document.getElementById("animal_name");
   let animal = n.textContent;
-  console.dir(animal);
   urlBuilderVids(animal);
 }
 
@@ -342,7 +337,6 @@ function urlBuilderVids(animal) {
   // building the API endpoint URL
   const baseUrl = `${host}/videos/`; //videos
   const endPointUrl = `${baseUrl}${animal}`;
-  console.log(endPointUrl);
   getVideosApi(endPointUrl);
 }
 
@@ -354,8 +348,6 @@ function getVideosApi(urlPath) {
       const vidArray = [];
       const animalVid = response.data;
       animalVid.forEach((animal) => vidArray.push(animal.id.videoId));
-      console.log("animal video clickd " + animalVid);
-      console.log("vidArray" + vidArray);
       videoDisplay(vidArray);
     })
     .catch(function (error) {
@@ -368,7 +360,6 @@ closeButton = document.getElementById("close-Btn");
 closeButton.addEventListener("click", closeBtn);
 
 function closeBtn() {
-  console.log("close btn");
   animalVids.style.display = "none";
 }
 /*********************************

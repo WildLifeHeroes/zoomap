@@ -28,7 +28,7 @@
         />
       </a>
       <a href="#map-img">
-        <h1 class="title">Virtual Point Defiance Zoo and Aquarium</h1>
+        <h1 class="title nav-link">Virtual Point Defiance Zoo and Aquarium</h1>
       </a>
 
       <ul>
@@ -48,12 +48,13 @@
         </li>
       </ul>
     </nav>
-    <h1>Welcome and enjoy your journey through the zoo</h1>
+    <h1>Welcome and enjoy your journey</h1>
     <p id="welcomeMsg">
       Journey through the Point Defiance Zoo and Aquarium virtually, and
       discover more about the animals. Interact with the map by clicking with
       the mouse or using a “tab” key on the location of the animal you would
-      like to visit and learn more about. Enjoy your exploration!
+      like to visit and learn more about. <br />
+      Enjoy your exploration!
     </p>
     <!-- main image containter for main page -->
     <div class="img-container">
@@ -275,8 +276,7 @@
             shape="circle"
             onclick="getAnimal(event)"
           />
-          <!-- has right cordinates but selected by border only for some reason
-even though everything is the same as the ones that work properly-->
+         <!-- right location meerkat -->
           <area
             id="meerkat"
             alt="meerkat"
@@ -336,7 +336,7 @@ even though everything is the same as the ones that work properly-->
           </div>
           <div class="card_buttons padding10">
             <div id="prev" class="button">Prev</div>
-            <div id="video" class="button" onclick="getVideos(event)">
+            <a href="#video_container"><div id="video" class="button" onclick="getVideos(event)"></a>
               Video
             </div>
             <div id="learn_more" class="button">Learn More</div>
