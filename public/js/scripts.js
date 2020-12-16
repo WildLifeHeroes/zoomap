@@ -9,15 +9,16 @@ const prev = document.querySelector("#prev");
 const next = document.querySelector("#next");
 const feed = document.querySelector("#feed");
 const video = document.querySelector("#video");
-const feedWrapper = document.querySelector(".feed-wrapper");
+const badgeWrapper = document.querySelector(".badgeWrapper");
 
 // used to close animal card if user click area outside of animal card or close button.
 window.addEventListener("click", (e) => {
   clickOrPress(e);
-
+  
   if (e.target == feed || e.target == video) {
     cardWrapper.style.display = "none";
     clearImg();
+    badgeWrapper.style.display = "block";
   }
 
   if (
