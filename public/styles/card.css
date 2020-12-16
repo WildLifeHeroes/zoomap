@@ -49,6 +49,7 @@ img {
 .card_title {
   grid-area: title;
   position: relative;
+  bottom: 20px;
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid rgb(19, 71, 123);
@@ -57,7 +58,7 @@ img {
 .close_btn {
   position: absolute;
   right: 20px;
-  top: 20px;
+  top: 30px;
 }
 .close_btn:hover {
   color: rgb(146, 6, 6);
@@ -75,6 +76,10 @@ img {
   border-radius: 18px;
   width: 200px;
   height: 200px;
+}
+
+.AnimalImg:hover {
+  transform: scale(1.3);
 }
 
 #animal_thumnail {
