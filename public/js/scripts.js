@@ -1,4 +1,4 @@
-const host = "http://localhost:3000";
+const host = "https://zoomap.herokuapp.com";
 let user = "Dustin"; //TODO: dynamically assign
 
 const cardWrapper = document.querySelector(".card_wrapper");
@@ -8,13 +8,14 @@ const outterLoginContainer = document.querySelector("#outter_login_container");
 const prev = document.querySelector("#prev");
 const next = document.querySelector("#next");
 const feed = document.querySelector("#feed");
+const video = document.querySelector("#video");
 const feedWrapper = document.querySelector(".feed-wrapper");
 
 // used to close animal card if user click area outside of animal card or close button.
 window.addEventListener("click", (e) => {
   clickOrPress(e);
 
-  if (e.target == feed) {
+  if (e.target == feed || e.target == video) {
     cardWrapper.style.display = "none";
     clearImg();
   }
@@ -99,18 +100,21 @@ function createBadges(data) {
     oneDollar.classList.add("donate-btn");
     oneDollar.classList.add("one-dollar");
     oneDollar.classList.add(animal);
-    const fiveDollar = document.createElement("button");
-    fiveDollar.setAttribute("type", "submit");
-    fiveDollar.setAttribute("tabIndex", ++tabIndex);
+    oneDollar.innerHTML = '$1';
+    const fiveDollar = document.createElement('button');
+    fiveDollar.setAttribute('type', "submit");
+    fiveDollar.setAttribute('tabIndex', ++tabIndex);
     fiveDollar.classList.add("donate-btn");
     fiveDollar.classList.add("five-dollar");
     fiveDollar.classList.add(animal);
-    const tenDollar = document.createElement("button");
-    tenDollar.setAttribute("type", "submit");
-    tenDollar.setAttribute("tabIndex", ++tabIndex);
+    fiveDollar.innerHTML = '$5';
+    const tenDollar = document.createElement('button');
+    tenDollar.setAttribute('type', "submit");
+    tenDollar.setAttribute('tabIndex', ++tabIndex);
     tenDollar.classList.add("donate-btn");
     tenDollar.classList.add("ten-dollar");
     tenDollar.classList.add(animal);
+    tenDollar.innerHTML = '$10';
 
     badge.appendChild(title);
     badge.appendChild(frame);
@@ -270,18 +274,25 @@ function serializeForm(form) {
   let obj = {};
   let formData = new FormData(form);
   for (let key of formData.keys()) {
-    //obj[`"${key}"`] = formData.get(key);
     obj[key] = formData.get(key);
   }
-  console.log(obj);
   postAPI(obj);
 }
+const membership = document.querySelector("#membership");
 
 function postAPI(obj) {
   axios
-    .post("http://localhost:3000/login", obj)
+    .post(`${host}/login`, obj)
     .then((res) => {
-      console.log(res);
+      if (res.data.message === undefined) {
+        console.log("login success");
+
+      } else {
+        console.log(res.data.message);
+
+      }
+      membership.innerHTML = obj["name"];
+      loginContainer.style.display = "none";
     })
     .catch((error) => {
       console.log(error);
@@ -292,6 +303,7 @@ function postAPI(obj) {
  * Animal Videos
  *********************************/
 const animalVids = document.getElementById("video_container");
+
 function videoDisplay(vidArray) {
   const video1 = document.getElementById("vid1");
   const video2 = document.getElementById("vid2");
@@ -321,9 +333,10 @@ function animalRequest() {
   console.dir(animal);
   urlBuilderVids(animal);
 }
+
 function urlBuilderVids(animal) {
   // building the API endpoint URL
-  const baseUrl = "http://localhost:3000/videos/"; //videos
+  const baseUrl = `${host}/videos/`; //videos
   const endPointUrl = `${baseUrl}${animal}`;
   console.log(endPointUrl);
   getVideosApi(endPointUrl);
