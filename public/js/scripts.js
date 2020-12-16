@@ -194,10 +194,8 @@ function callingAPI(url, e) {
         animalBack.images.images,
         animalBack.animal.name,
         animalBack.animal.info,
-        e.target.tabIndex,
-        animalBack.animal.moreInfoUrl
+        e.target.tabIndex
       );
-
     })
     .catch(function (error) {
       // handle error
@@ -206,7 +204,7 @@ function callingAPI(url, e) {
 }
 
 //initiate setting animal card.
-function setCard(img, name, info, tabIndex, infoUrl) {
+function setCard(img, name, info, tabIndex) {
   const card = getCard_Wrapper();
   const classname = "." + `${card.className}`;
   const target = document.querySelector(classname);
@@ -214,7 +212,6 @@ function setCard(img, name, info, tabIndex, infoUrl) {
   setCard_Images(img);
   setCard_Title(name);
   setCard_descriptions(info);
-  setCard_LearnMore(infoUrl);
   popCard(target, tabIndex);
 }
 
@@ -238,12 +235,6 @@ function setCard_Title(name) {
 function setCard_descriptions(info) {
   let i = document.querySelector("#animal_description");
   i.innerHTML = info;
-}
-
-function setCard_LearnMore(link) {
-  let n = document.querySelector('#learn_more');
-  n.setAttribute('onclick', `window.open('${link}','_blank')`);
-  console.log(link);
 }
 
 // show card upon click event triggered.
@@ -321,8 +312,9 @@ function videoDisplay(vidArray) {
   const video3 = document.getElementById("vid3");
   const video4 = document.getElementById("vid4");
   const video5 = document.getElementById("vid5");
-  const baseUrl = "https://www.youtube.com/embed/";
+  baseUrl = "https://www.youtube.com/embed/";
   video1.src = baseUrl + vidArray[0];
+  console.log("video1" + video1.src);
   video2.src = baseUrl + vidArray[1];
   video3.src = baseUrl + vidArray[2];
   video4.src = baseUrl + vidArray[3];
@@ -333,12 +325,14 @@ function videoDisplay(vidArray) {
 //when video button is clicked call request video method.
 function getVideos(event) {
   event.preventDefault();
+  console.log("video event listener");
   animalRequest();
 }
 
 function animalRequest() {
   const n = document.getElementById("animal_name");
   let animal = n.textContent;
+  console.dir(animal);
   urlBuilderVids(animal);
 }
 
@@ -346,6 +340,7 @@ function urlBuilderVids(animal) {
   // building the API endpoint URL
   const baseUrl = `${host}/videos/`; //videos
   const endPointUrl = `${baseUrl}${animal}`;
+  console.log(endPointUrl);
   getVideosApi(endPointUrl);
 }
 
@@ -357,6 +352,8 @@ function getVideosApi(urlPath) {
       const vidArray = [];
       const animalVid = response.data;
       animalVid.forEach((animal) => vidArray.push(animal.id.videoId));
+      console.log("animal video clickd " + animalVid);
+      console.log("vidArray" + vidArray);
       videoDisplay(vidArray);
     })
     .catch(function (error) {
@@ -365,11 +362,15 @@ function getVideosApi(urlPath) {
     });
 }
 
-closeButton = document.getElementById("close-Btn");
+const closeButton = document.getElementById("close-Btn");
 closeButton.addEventListener("click", closeBtn);
 
+const closingBtn = document.getElementById("closing-btn");
+closingBtn.addEventListener("click", closeBtn);
 function closeBtn() {
+  console.log("close btn");
   animalVids.style.display = "none";
+  badgeWrapper.style.display = "none";
 }
 /*********************************
  * Animal Videos end
