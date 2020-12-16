@@ -3,7 +3,7 @@ img {
 }
 
 .visual {
-  border: 1px solid blue;
+  border: 2px solid rgb(19, 71, 123);
 }
 
 .padding10 {
@@ -49,18 +49,19 @@ img {
 .card_title {
   grid-area: title;
   position: relative;
+  bottom: 20px;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid blue;
+  border-bottom: 1px solid rgb(19, 71, 123);
 }
 
 .close_btn {
   position: absolute;
   right: 20px;
-  top: 20px;
+  top: 30px;
 }
 .close_btn:hover {
-  color: red;
+  color: rgb(146, 6, 6);
 }
 
 .card_images {
@@ -73,8 +74,12 @@ img {
   background-position: center;
   overflow: hidden;
   border-radius: 18px;
-  width: 200px; 
+  width: 200px;
   height: 200px;
+}
+
+.AnimalImg:hover {
+  transform: scale(1.3);
 }
 
 #animal_thumnail {
@@ -95,10 +100,13 @@ img {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  text-align: center;
+  line-height: 30px;
 }
 
 .button {
-  border: 1px solid blue;
+  background-color: rgb(204, 225, 244);
+  border: 1px solid rgb(19, 71, 123);
   border-radius: 18px;
   padding: 0.3em;
   width: 100px;
@@ -106,6 +114,7 @@ img {
 }
 
 .button:hover {
-  color: #fff;
-  background-color: black;
+  border: 2px solid rgb(204, 225, 244);
+  color: rgb(255, 255, 255);
+  background-color: rgb(19, 71, 123);
 }

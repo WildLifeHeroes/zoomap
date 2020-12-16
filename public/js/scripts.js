@@ -15,10 +15,9 @@ const badgeWrapper = document.querySelector(".badgeWrapper");
 window.addEventListener("click", (e) => {
   clickOrPress(e);
 
-  if (e.target == feed || e.target == video) {
+  if (e.target == video) {
     cardWrapper.style.display = "none";
     clearImg();
-    badgeWrapper.style.display = "block";
   }
 
   if (
@@ -56,6 +55,7 @@ function clickOrPress(e) {
       break;
     case feed:
       displayBadges();
+      badgeWrapper.style.display = "block";
       break;
     default:
       break;
@@ -101,21 +101,21 @@ function createBadges(data) {
     oneDollar.classList.add("donate-btn");
     oneDollar.classList.add("one-dollar");
     oneDollar.classList.add(animal);
-    oneDollar.innerHTML = '$1';
-    const fiveDollar = document.createElement('button');
-    fiveDollar.setAttribute('type', "submit");
-    fiveDollar.setAttribute('tabIndex', ++tabIndex);
+    oneDollar.innerHTML = "$1";
+    const fiveDollar = document.createElement("button");
+    fiveDollar.setAttribute("type", "submit");
+    fiveDollar.setAttribute("tabIndex", ++tabIndex);
     fiveDollar.classList.add("donate-btn");
     fiveDollar.classList.add("five-dollar");
     fiveDollar.classList.add(animal);
-    fiveDollar.innerHTML = '$5';
-    const tenDollar = document.createElement('button');
-    tenDollar.setAttribute('type', "submit");
-    tenDollar.setAttribute('tabIndex', ++tabIndex);
+    fiveDollar.innerHTML = "$5";
+    const tenDollar = document.createElement("button");
+    tenDollar.setAttribute("type", "submit");
+    tenDollar.setAttribute("tabIndex", ++tabIndex);
     tenDollar.classList.add("donate-btn");
     tenDollar.classList.add("ten-dollar");
     tenDollar.classList.add(animal);
-    tenDollar.innerHTML = '$10';
+    tenDollar.innerHTML = "$10";
 
     badge.appendChild(title);
     badge.appendChild(frame);
@@ -194,10 +194,8 @@ function callingAPI(url, e) {
         animalBack.images.images,
         animalBack.animal.name,
         animalBack.animal.info,
-        e.target.tabIndex,
-        animalBack.animal.moreInfoUrl
+        e.target.tabIndex
       );
-
     })
     .catch(function (error) {
       // handle error
@@ -206,7 +204,7 @@ function callingAPI(url, e) {
 }
 
 //initiate setting animal card.
-function setCard(img, name, info, tabIndex, infoUrl) {
+function setCard(img, name, info, tabIndex) {
   const card = getCard_Wrapper();
   const classname = "." + `${card.className}`;
   const target = document.querySelector(classname);
@@ -214,7 +212,6 @@ function setCard(img, name, info, tabIndex, infoUrl) {
   setCard_Images(img);
   setCard_Title(name);
   setCard_descriptions(info);
-  setCard_LearnMore(infoUrl);
   popCard(target, tabIndex);
 }
 
@@ -295,10 +292,8 @@ function postAPI(obj) {
     .then((res) => {
       if (res.data.message === undefined) {
         console.log("login success");
-
       } else {
         console.log(res.data.message);
-
       }
       membership.innerHTML = obj["name"];
       loginContainer.style.display = "none";
@@ -372,12 +367,16 @@ function getVideosApi(urlPath) {
     });
 }
 
-closeButton = document.getElementById("close-Btn");
+const closeButton = document.getElementById("close-Btn");
 closeButton.addEventListener("click", closeBtn);
+
+const closingBtn = document.getElementById("closing-btn");
+closingBtn.addEventListener("click", closeBtn);
 
 function closeBtn() {
   console.log("close btn");
   animalVids.style.display = "none";
+  badgeWrapper.style.display = "none";
 }
 /*********************************
  * Animal Videos end

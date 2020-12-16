@@ -10,7 +10,6 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="styles/card.css" />
-    <link rel="stylesheet" href="styles/main.css" />
     <link rel="stylesheet" href="styles/styles.css" />
     <link rel="stylesheet" href="styles/membership.css" />
     <link rel="stylesheet" href="styles/badge.css" />
@@ -28,7 +27,7 @@
         />
       </a>
       <a href="#map-img">
-        <h1 class="title">Virtual Point Defiance Zoo and Aquarium</h1>
+        <h1 class="title nav-link">Virtual Point Defiance Zoo and Aquarium</h1>
       </a>
 
       <ul>
@@ -48,12 +47,13 @@
         </li>
       </ul>
     </nav>
-    <h1>Welcome and enjoy your journey through the zoo</h1>
+    <h1>Welcome</h1>
     <p id="welcomeMsg">
       Journey through the Point Defiance Zoo and Aquarium virtually, and
       discover more about the animals. Interact with the map by clicking with
       the mouse or using a “tab” key on the location of the animal you would
-      like to visit and learn more about. Enjoy your exploration!
+      like to visit and learn more about. <br />
+      Enjoy your exploration!
     </p>
     <!-- main image containter for main page -->
     <div class="img-container">
@@ -69,49 +69,46 @@
           usemap="#zoomap"
           id="map-img"
         />
+        <!-- right location shark1 -->
         <map name="zoomap" class="color-map">
           <area
             id="shark1"
             alt="hammer-shark"
             title="hammer_shark"
-            href=""
-            coords="418,120,15"
+            href=""S
+            coords="446,120,15"
             shape="circle"
             onclick="getAnimal(event)"
           />
+          <!-- right location sea-turtle -->
           <area
             id="turtle"
             alt="sea-turtle"
             title="sea_turtle"
             href=""
-            coords="421,120,15"
+            coords="472,108,15"
             shape="circle"
             onclick="getAnimal(event)"
           />
+          <!-- right location penguin -->
           <area
             id="penguin"
             alt="penguin"
             title="penguin"
             href=""
-            coords="634,183,15"
+            coords="654,183,15"
             shape="circle"
             onclick="getAnimal(event)"
           />
+          <!-- right location lemur -->
           <area
             id="lemur"
             alt="lemur"
             title="lemur"
             href=""
-            coords="456,394,23"
+            coords="472,394,15"
             shape="circle"
             onclick="getAnimal(event)"
-          />
-          <area
-            alt="animal1"
-            title="animal1"
-            href=""
-            coords="456,395,17"
-            shape="circle"
           />
           <!-- seal done -->
           <area
@@ -228,7 +225,7 @@
           <!-- ant-eater done -->
           <area
             id="ant_eater"
-            alt="ant-eater"
+            alt="anteater"
             title="ant_eater"
             href=""
             coords="952,156,16"
@@ -275,14 +272,13 @@
             shape="circle"
             onclick="getAnimal(event)"
           />
-          <!-- has right cordinates but selected by border only for some reason
-even though everything is the same as the ones that work properly-->
+         <!-- right location meerkat -->
           <area
             id="meerkat"
             alt="meerkat"
             title="meerkat"
             href=""
-            coords="540,419,17"
+            coords="540,419,15"
             shape="circle"
           />
 
@@ -336,7 +332,7 @@ even though everything is the same as the ones that work properly-->
           </div>
           <div class="card_buttons padding10">
             <div id="prev" class="button">Prev</div>
-            <div id="video" class="button" onclick="getVideos(event)">
+            <a href="#video_container"><div id="video" class="button" onclick="getVideos(event)"></a>
               Video
             </div>
             <div id="learn_more" class="button">Learn More</div>
@@ -374,8 +370,14 @@ even though everything is the same as the ones that work properly-->
     <!-- login&registration end-->
     <!--- badges -->
     <div class="badgeWrapper">
+      <button id="closing-btn">X</button>
+      <h1 class="badges-text-title">Donations</h1>
+      <hr>
+      <h3>Feed these precious animals and collect your animal badges!</h3>
+      <p class="badges-text">silver: $1 | bronze: $5 | gold: $10</p>
+      <hr>
       <div class="badge-container"></div>
-    </div>
+    </div> 
     <!-- badges end-->
 
     <!-- videos start -->
